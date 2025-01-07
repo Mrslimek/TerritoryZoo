@@ -46,7 +46,7 @@ cross.forEach(item => {
 })
 
 sliderButton.forEach(item => {
-    item.addEventListener('click', (e) => {
+    item.addEventListener('click', e => {
         document.body.style.overflow = 'hidden'
         modal.classList.add('modal__active')
         buyOneClick.classList.add('modal__active')

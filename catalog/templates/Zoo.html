@@ -400,25 +400,25 @@
                                     </div>
                                         <h2 class="header__logo-text">Территория <span>ZOO</span></h2>
                                 </div></a>
-                                <search class="header__bottom-search">
-                                    <div class="header__bottom-search-img">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="20"
-                                            height="21"
-                                            viewBox="0 0 20 21"
-                                            fill="none"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                clip-rule="evenodd"
-                                                d="M8 12.1299C5.791 12.1299 4 10.3389 4 8.12988C4 5.92088 5.791 4.12988 8 4.12988C10.209 4.12988 12 5.92088 12 8.12988C12 10.3389 10.209 12.1299 8 12.1299ZM17.707 16.4229L12.887 11.6029C13.585 10.6219 14 9.42588 14 8.12988C14 4.81688 11.313 2.12988 8 2.12988C4.687 2.12988 2 4.81688 2 8.12988C2 11.4429 4.687 14.1299 8 14.1299C9.296 14.1299 10.492 13.7149 11.473 13.0169L16.293 17.8369C16.488 18.0319 16.744 18.1299 17 18.1299C17.256 18.1299 17.512 18.0319 17.707 17.8369C18.098 17.4459 18.098 16.8139 17.707 16.4229Z"
-                                                fill="#5C5F62"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <input type="text" name="search" placeholder="Поиск" />
-                                </search>
+                                <form class="header__bottom-search" action="{% url 'search_results'  %}">
+                                    <button style="background-color: white;" class="header__bottom-search-img">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="21"
+                                                viewBox="0 0 20 21"
+                                                fill="none"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    clip-rule="evenodd"
+                                                    d="M8 12.1299C5.791 12.1299 4 10.3389 4 8.12988C4 5.92088 5.791 4.12988 8 4.12988C10.209 4.12988 12 5.92088 12 8.12988C12 10.3389 10.209 12.1299 8 12.1299ZM17.707 16.4229L12.887 11.6029C13.585 10.6219 14 9.42588 14 8.12988C14 4.81688 11.313 2.12988 8 2.12988C4.687 2.12988 2 4.81688 2 8.12988C2 11.4429 4.687 14.1299 8 14.1299C9.296 14.1299 10.492 13.7149 11.473 13.0169L16.293 17.8369C16.488 18.0319 16.744 18.1299 17 18.1299C17.256 18.1299 17.512 18.0319 17.707 17.8369C18.098 17.4459 18.098 16.8139 17.707 16.4229Z"
+                                                    fill="#5C5F62"
+                                                />
+                                            </svg>
+                                    </button>
+                                    {{search_form.query}}
+                                </form>
                                 <nav class="header__bottom-nav">
                                     <ul class="header__bottom-nav-list">
                                         <li class="header__bottom-nav-item">

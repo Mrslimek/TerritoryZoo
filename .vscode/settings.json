@@ -1,5 +1,5 @@
 {
-    "files.autoSave": "onWindowChange",
+    "files.autoSave": "afterDelay",
     "editor.colorDecorators": true,
     "editor.guides.bracketPairs": true,
     "editor.minimap.enabled": false
