@@ -1,0 +1,2 @@
+
+const weightButton = document.querySelectorAll()
