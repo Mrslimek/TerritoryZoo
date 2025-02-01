@@ -196,7 +196,7 @@ function filterProducts(
         })
         .then((data) => {
             console.log(data);
-            renderProducts(data);
+            renderProducts(data, fetchUrl);
         })
         .catch((error) => {
             console.error("Ошибка:", error);
@@ -389,7 +389,7 @@ function renderProducts(data, fetchUrl) {
             fetch(data.previous)
             .then(response => response.json())
             .then(data => {
-                renderProducts(data, fetchUrl)
+                renderProducts(data)
             }
         )
         };

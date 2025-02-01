@@ -581,8 +581,47 @@
                                     <button type="button" class="filter__button">Применить фильтры</button>
                                 </aside>
                                 <div class="product__list-wrap">
-                                    <ul class="products__list"></ul>
-                                    <div class="products__pagination"></div>
+
+                                    <div class="products__pagination">
+                                        <div class="products__prev" id="productsPrev" pageData="{% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}">
+                                            {% if page_obj.has_previous %}
+                                                <div class="products__prev-img">
+                                                    <svg width="16.000000" height="16.000000" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <desc>
+                                                                Created with Pixso.
+                                                        </desc>
+                                                        <defs/>
+                                                        <path id="Primary fill" d="M9.6001 12.7998C9.39502 12.7998 9.19043 12.7214 9.03418 12.5654L5.03418 8.56543C4.72168 8.25269 4.72168 7.74707 5.03418 7.43433L9.03418 3.43433C9.34717 3.12158 9.85303 3.12158 10.1655 3.43433C10.4785 3.74707 10.4785 4.25269 10.1655 4.56543L6.73145 8L10.1655 11.4343C10.4785 11.7471 10.4785 12.2527 10.1655 12.5654C10.0098 12.7214 9.80469 12.7998 9.6001 12.7998Z" fill="#00A0AC" fill-opacity="1.000000" fill-rule="evenodd"/>
+                                                    </svg>
+                                                </div>
+                                                <p>Предыдущая</p>
+                                            {% endif %}
+                                        </div>
+                                        <ul class="products__pagination-list">
+                                            {% for num in page_obj.paginator.page_range %}
+                                                <li class="products__pagination-list-item {% if page_obj.number == num %}products__pagination-list-item-active{% endif %}" id="pageNum{{forloop.counter}}" pageData="{{num}}">
+                                                    {{ num }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                        <div class="products__next" id="productsNext" pageData="{% if page_obj.has_next %}{{page_obj.next_page_number}}{% endif %}">
+                                            {% if page_obj.has_next %}
+                                                    <p>
+                                                        Следующая
+                                                    </p>
+                                                    <div class="products__next-img">
+                                                        <svg width="16.000000" height="16.000000" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                        <desc>
+                                                                Created with Pixso.
+                                                        </desc>
+                                                        <defs/>
+                                                        <path id="Primary fill" d="M6.3999 12.7998C6.19482 12.7998 5.99023 12.7214 5.83398 12.5654C5.52148 12.2527 5.52148 11.7471 5.83398 11.4343L9.26855 8L5.83398 4.56543C5.52148 4.25269 5.52148 3.74707 5.83398 3.43433C6.14697 3.12158 6.65283 3.12158 6.96533 3.43433L10.9653 7.43433C11.2783 7.74707 11.2783 8.25269 10.9653 8.56543L6.96533 12.5654C6.80957 12.7214 6.60449 12.7998 6.3999 12.7998Z" fill="#00A0AC" fill-opacity="1.000000" fill-rule="evenodd"/>
+                                                        </svg>
+                                                    </div>
+                                                </a>
+                                            {% endif %} 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -973,7 +1012,6 @@
         <script defer src="../static/catalogZoo/js/slider.js"></script>
         <script defer src="../static/catalogZoo/js/aside_filter_for_brands.js"></script>
         <script src="../static/Zoo/js/chooseWeight.js"></script>
-        <script src="../static/catalogZoo/js/fetch_all_products.js"></script>
         <!-- <script defer src="../static/catalogZoo/js/addToBasket.js"></script> -->
     </body>
 </html>

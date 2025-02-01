@@ -5,6 +5,6 @@ from .views import get_products_paginated, get_products_filtered
 
 
 urlpatterns = [
-    path('products_paginated/', get_products_paginated),
+    path('products/', get_products_paginated),
     path('filtered_products/', get_products_filtered),
 ]

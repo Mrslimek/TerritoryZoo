@@ -19,6 +19,7 @@ def get_products_paginated(request):
     page_obj = paginator.paginate_queryset(products, request)
 
     serializer = FilterProductSerializer(page_obj, many=True)
+    print(json.loads(paginator.get_paginated_response(serializer.data)))
     return paginator.get_paginated_response(serializer.data)
 
 

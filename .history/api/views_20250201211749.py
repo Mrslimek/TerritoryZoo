@@ -6,7 +6,6 @@ from rest_framework.decorators import api_view
 #Project
 from .serializers import *
 from .pagination import CustomPagination
-import json
 
 # Create your views here.
 
@@ -15,7 +14,7 @@ import json
 def get_products_paginated(request):
 
     products = Product.objects.all()
-    paginator = CustomPagination()
+    paginator = ()
     page_obj = paginator.paginate_queryset(products, request)
 
     serializer = FilterProductSerializer(page_obj, many=True)
@@ -46,7 +45,7 @@ def get_products_filtered(request):
     if 'order_by' in request.data:
         products = products.order_by(request.data['order_by'])
 
-    paginator = CustomPagination()
+    paginator = PageNumberPagination()
     page_obj = paginator.paginate_queryset(products, request)
     print(page_obj)
 

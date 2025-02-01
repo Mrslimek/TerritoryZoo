@@ -3,10 +3,9 @@ from django.shortcuts import render
 #Rest framework
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.pagination import CustomPagination
 #Project
 from .serializers import *
-from .pagination import CustomPagination
-import json
 
 # Create your views here.
 
@@ -15,7 +14,7 @@ import json
 def get_products_paginated(request):
 
     products = Product.objects.all()
-    paginator = CustomPagination()
+    paginator = PageNumberPagination()
     page_obj = paginator.paginate_queryset(products, request)
 
     serializer = FilterProductSerializer(page_obj, many=True)
@@ -46,7 +45,7 @@ def get_products_filtered(request):
     if 'order_by' in request.data:
         products = products.order_by(request.data['order_by'])
 
-    paginator = CustomPagination()
+    paginator = PageNumberPagination()
     page_obj = paginator.paginate_queryset(products, request)
     print(page_obj)
 

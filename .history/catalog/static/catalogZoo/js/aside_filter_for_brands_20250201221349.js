@@ -389,7 +389,7 @@ function renderProducts(data, fetchUrl) {
             fetch(data.previous)
             .then(response => response.json())
             .then(data => {
-                renderProducts(data, fetchUrl)
+                renderProducts(data)
             }
         )
         };
@@ -477,7 +477,7 @@ function renderProducts(data, fetchUrl) {
             fetch(data.next)
             .then(response => response.json())
             .then(data => {
-                renderProducts(data, fetchUrl)
+                renderProducts(data)
             }
         )
         }

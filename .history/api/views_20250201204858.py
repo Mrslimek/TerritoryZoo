@@ -3,23 +3,20 @@ from django.shortcuts import render
 #Rest framework
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
 #Project
 from .serializers import *
-from .pagination import CustomPagination
-import json
 
 # Create your views here.
 
 # APIView
 @api_view(['GET'])
-def get_products_paginated(request):
+def get_products(request):
 
     products = Product.objects.all()
-    paginator = CustomPagination()
-    page_obj = paginator.paginate_queryset(products, request)
-
-    serializer = FilterProductSerializer(page_obj, many=True)
-    return paginator.get_paginated_response(serializer.data)
+    paginator = 
+    serializer = FilterProductSerializer(products, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET', 'POST'])
@@ -46,7 +43,7 @@ def get_products_filtered(request):
     if 'order_by' in request.data:
         products = products.order_by(request.data['order_by'])
 
-    paginator = CustomPagination()
+    paginator = PageNumberPagination()
     page_obj = paginator.paginate_queryset(products, request)
     print(page_obj)
 

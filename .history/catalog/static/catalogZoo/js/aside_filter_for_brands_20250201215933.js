@@ -204,7 +204,7 @@ function filterProducts(
 }
 
 // Функция для рендера карточек после получения данных с api
-function renderProducts(data, fetchUrl) {
+function renderProducts(data) {
     const container = document.querySelector(
         ".product__list-wrap .products__list"
     );
@@ -389,7 +389,7 @@ function renderProducts(data, fetchUrl) {
             fetch(data.previous)
             .then(response => response.json())
             .then(data => {
-                renderProducts(data, fetchUrl)
+                renderProducts(data)
             }
         )
         };
@@ -419,15 +419,7 @@ function renderProducts(data, fetchUrl) {
             productsPaginationListItem.classList.add(
                 "products__pagination-list-item"
             );
-            productsPaginationListItem.onclick = (() => {
-                const page = i;  // Создаем новую переменную для замыкания
-                return () => {
-                    console.log(page);
-                    fetch(`${fetchUrl}/?page=${page}`)
-                        .then(response => response.json())
-                        .then(data => renderProducts(data, fetchUrl));
-                };
-            })();
+            product
         }
 
         productsPaginationList.appendChild(productsPaginationListItem);
@@ -477,7 +469,7 @@ function renderProducts(data, fetchUrl) {
             fetch(data.next)
             .then(response => response.json())
             .then(data => {
-                renderProducts(data, fetchUrl)
+                renderProducts(data)
             }
         )
         }

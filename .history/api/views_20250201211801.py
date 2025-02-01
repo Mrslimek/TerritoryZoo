@@ -6,7 +6,6 @@ from rest_framework.decorators import api_view
 #Project
 from .serializers import *
 from .pagination import CustomPagination
-import json
 
 # Create your views here.
 

@@ -57,6 +57,59 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
+    // Пагинация
+    const productsPrev = document.getElementById("productsPrev");
+    // Получение pageData у productsPrev и вызов функции filterProducts
+    productsPrev.addEventListener("click", function () {
+        let pageNumber = productsPrev.getAttribute("pageData");
+        localStorage.setItem("pageNumber", pageNumber);
+        let localStorageData = getLocalStorageData();
+
+        filterProducts(
+            this.value,
+            localStorageData.brandIds.map((id) => parseInt(id, 10)),
+            localStorageData.promotion,
+            localStorageData.orderByData,
+            localStorage.pageNumber
+        );
+    });
+    const pageNum = document.querySelectorAll(
+        ".products__pagination-list-item"
+    );
+    // Получение pageData у pageNum и вызов функции filterProducts
+    pageNum.forEach((num) => {
+        num.addEventListener("click", function () {
+            let pageNumber = num.getAttribute("pageData");
+            localStorage.setItem("pageNumber", pageNumber);
+
+            let localStorageData = getLocalStorageData();
+
+            filterProducts(
+                this.value,
+                localStorageData.brandIds.map((id) => parseInt(id, 10)),
+                localStorageData.promotion,
+                localStorageData.orderByData,
+                localStorage.pageNumber
+            );
+        });
+    });
+    const productsNext = document.getElementById("productsNext");
+    // Получение pageData у productsNext и вызов функции filterProducts
+    productsNext.addEventListener("click", function () {
+        let pageNumber = productsNext.getAttribute("pageData");
+        localStorage.setItem("pageNumber", pageNumber);
+
+        let localStorageData = getLocalStorageData();
+
+        filterProducts(
+            this.value,
+            localStorageData.brandIds.map((id) => parseInt(id, 10)),
+            localStorageData.promotion,
+            localStorageData.orderByData,
+            localStorage.pageNumber
+        );
+    });
+
     // Добавляет выбранное значение в localStorage и вызывает getLocalStorageData, вызывает функцию для fetch запроса
     // Не вызывает UpdateLocalStorage, потому что я посчитал, что сбрасывать этот фильтр не нужно
     selectListItem.forEach((item) => {
@@ -204,7 +257,7 @@ function filterProducts(
 }
 
 // Функция для рендера карточек после получения данных с api
-function renderProducts(data, fetchUrl) {
+function renderProducts(data) {
     const container = document.querySelector(
         ".product__list-wrap .products__list"
     );
@@ -215,7 +268,7 @@ function renderProducts(data, fetchUrl) {
     );
     paginationContainer.innerHTML = "";
 
-    data.results.forEach((product) => {
+    data..forEach((product) => {
         // Создаем HTML элементы
         const productItem = document.createElement("li");
         productItem.classList.add("products__list-item");
@@ -353,7 +406,7 @@ function renderProducts(data, fetchUrl) {
 
     const productsPrevImg = document.createElement("div");
     productsPrevImg.classList.add("products__prev-img");
-    if (data.previous) {
+    if (data.has_previous) {
         const productsPrevImgSvg = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "svg"
@@ -385,14 +438,6 @@ function renderProducts(data, fetchUrl) {
 
         const previousP = document.createElement("p");
         previousP.textContent = "Предыдущая";
-        previousP.onclick = () => {
-            fetch(data.previous)
-            .then(response => response.json())
-            .then(data => {
-                renderProducts(data, fetchUrl)
-            }
-        )
-        };
 
         productsPrev.appendChild(productsPrevImg);
         productsPrev.appendChild(previousP);
@@ -408,6 +453,7 @@ function renderProducts(data, fetchUrl) {
         productsPaginationListItem.textContent = `${i}`;
 
         if (data.current_page == i) {
+            console.log("Зашел в проверку", `i = ${i}, ${typeof i}`);
 
             productsPaginationListItem.classList.add(
                 "products__pagination-list-item"
@@ -415,19 +461,14 @@ function renderProducts(data, fetchUrl) {
             productsPaginationListItem.classList.add(
                 "products__pagination-list-item-active"
             );
+            productsPaginationListItem.setAttribute("id", `pageNum${i}`);
+            productsPaginationListItem.setAttribute("pageData", `${i}`);
         } else {
             productsPaginationListItem.classList.add(
                 "products__pagination-list-item"
             );
-            productsPaginationListItem.onclick = (() => {
-                const page = i;  // Создаем новую переменную для замыкания
-                return () => {
-                    console.log(page);
-                    fetch(`${fetchUrl}/?page=${page}`)
-                        .then(response => response.json())
-                        .then(data => renderProducts(data, fetchUrl));
-                };
-            })();
+            productsPaginationListItem.setAttribute("id", `pageNum${i}`);
+            productsPaginationListItem.setAttribute("pageData", `${i}`);
         }
 
         productsPaginationList.appendChild(productsPaginationListItem);
@@ -441,7 +482,7 @@ function renderProducts(data, fetchUrl) {
 
     const productsNextImg = document.createElement("div");
     productsPrevImg.classList.add("products__prev-img");
-    if (data.next) {
+    if (data.has_next) {
         const productsNextImgSvg = document.createElementNS(
             "http://www.w3.org/2000/svg",
             "svg"
@@ -473,14 +514,6 @@ function renderProducts(data, fetchUrl) {
 
         const nextP = document.createElement("p");
         nextP.textContent = "Следующая";
-        nextP.onclick = () => {
-            fetch(data.next)
-            .then(response => response.json())
-            .then(data => {
-                renderProducts(data, fetchUrl)
-            }
-        )
-        }
 
         productsNext.appendChild(nextP);
         productsNext.appendChild(productsNextImgSvg);

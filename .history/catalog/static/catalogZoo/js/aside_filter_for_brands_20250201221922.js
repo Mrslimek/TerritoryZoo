@@ -8,7 +8,7 @@ const catalogSelectActive = document.querySelector(
     ".catalog__sort-select-active"
 );
 
-//EventListener для 'выпадания списка' выше
+//EventListener для 'выпад списка' выше
 select.addEventListener("click", () => {
     selectList.classList.toggle("catalog__sort-select-list-active");
 });
