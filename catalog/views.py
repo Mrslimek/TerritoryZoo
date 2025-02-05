@@ -429,7 +429,8 @@ def profile(request):
     user_change_form = CustomUserChangeForm()
     user_profile_change_form = UserProfileChangeForm()
     user = request.user
-    profile = UserProfile.objects.filter(user=user)
+    profile = UserProfile.objects.get(user=user)
+
 
     if request.method == 'POST':
         if 'user_change' in request.POST:

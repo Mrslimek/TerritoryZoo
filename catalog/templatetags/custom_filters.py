@@ -38,6 +38,7 @@ def censor_email(email):
         censored_local = local_part[0] + '*'
     return f'{censored_local}@{domain}'
 
-@register.filter(name='censor_phone')
+@register.filter(name='censor_phone_number')
 def censor_phone_number(phone):
-    pass
+    censored_phone = phone[:5] + ('*' * (len(phone[5:-2]))) + phone[-2:]
+    return censored_phone

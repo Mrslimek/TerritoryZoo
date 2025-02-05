@@ -473,7 +473,7 @@
                                 <p>{{user_change_form.last_name.label}}: {{user_change_form.last_name}}</p>
                             </div>
                             <div class="user_controls-form">
-                                <p>Текущий email: <strong>{{ user.email|censor }}</strong></p>
+                                <p>Текущий email: <strong>{{ user.email|censor_email }}</strong></p>
                                 <p>{{user_change_form.email.label}}: {{user_change_form.email}}</p>
                             </div>
                             <div class="user_controls-form">
