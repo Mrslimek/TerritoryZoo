@@ -42,3 +42,13 @@ def censor_email(email):
 def censor_phone_number(phone):
     censored_phone = phone[:5] + ('*' * (len(phone[5:-2]))) + phone[-2:]
     return censored_phone
+
+@register.filter
+def get_attr(obj, attr_name):
+    return getattr(obj, attr_name, None)
+
+@register.filter
+def has_attr(obj, attr_name):
+    return hasattr(obj, attr_name)
+
+

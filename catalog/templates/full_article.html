@@ -1,12 +1,13 @@
 <!-- templates/register.html -->
+ {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <title>Логин</title>
-        <link rel="stylesheet" href="../static/Zoo/css/null.css" />
-        <link rel="stylesheet" href="../static/Zoo/css/style.css" />
-        <link rel="stylesheet" href="../static/full_article/css/full_article.css" />
+        <link rel="stylesheet" href="{% static '/Zoo/css/null.css' %}"  />
+        <link rel="stylesheet" href="{% static '/Zoo/css/style.css' %} " />
+        <link rel="stylesheet" href="{% static '/full_article/css/full_article.css' %}" />
         <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
     </head>
     <body>
@@ -438,7 +439,7 @@
                                     Обратный звонок
                                 </button>
                                 {% if request.user.is_authenticated %}
-                                    <a class="header__up-login-button" href="http://127.0.0.1:8000/profile">
+                                    <a class="header__up-login-button" href="{% url 'profile' %}">
                                         <img src="/media/user.svg" alt="">
                                     </a>
                                 {% else %}

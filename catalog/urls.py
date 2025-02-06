@@ -6,7 +6,6 @@ from .views import *
 
 urlpatterns = [
     path('', home),
-    path('profile/', profile, name='profile'),
     path('catalog/', catalog, name='catalog'),
     path('catalog/<int:product_category_id>', catalog_filter_by_id, name='filtered_products'),
     path('details/<int:id>', card_product, name='card_product'),
@@ -16,11 +15,6 @@ urlpatterns = [
     path('full_article/<int:article_id>', get_full_article, name='full_article'),
     path('results/', search_products, name='search_results'),
     path('sales/', sales, name='sales'),
-    # Система регистрации/авторизации
-    path('register/', register_user, name='register'),
-    path('login/', login_user, name='login'),
-    path('logout/', logout_user, name='logout'),
-    path('reset_form/', reset_password, name='reset'),
     # Действия с объектами в корзине
     path('add_to_cart/<int:product_id>', add_to_cart, name='add_to_cart'),
     path('increase/<int:cart_item_id>', increase_quantity, name='increase_quantity'),

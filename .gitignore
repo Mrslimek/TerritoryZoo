@@ -162,3 +162,7 @@ cython_debug/
 .idea
 idea/
 
+#VS Code
+.history
+.vscode
+
