@@ -123,20 +123,21 @@ class CustomUserChangeForm(forms.ModelForm):
             raise forms.ValidationError("Пароли не совпадают")
         return password2
     
-def save(self):
-    instance = self.instance
-    for key, value in self.cleaned_data.items():
-        if key == 'password1' and value:
-            instance.set_password(value)
-        elif value:
-            setattr(instance, key, value)
-        
-        # Сохраняем изменения в каждом цикле, если атрибут был обновлен
-        if value:
-            print(vars(instance), 'ВЫВОДВЫВЫОДВЫВОЖ')  # Вывод атрибутов и их значений
-            instance.save()
-    
-    return instance
+    def save(self):
+        print('РАБОТАЕТ SAVE')
+        print(self.cleaned_data.items(), 'CLEANED DATA ITEMS')
+
+        instance = self.instance
+
+        for key, value in self.cleaned_data.items():
+            if key == 'password1' and value:
+                instance.set_password(value)
+            else: 
+                if value:
+                    print(f'добавил atr - {value}')
+                    setattr(instance, key, value)
+
+        return instance
 
 
 class UserProfileChangeForm(forms.ModelForm):

@@ -206,7 +206,7 @@
                                         <img src="/media/user.svg" alt="">
                                     </a>
                                 {% else %}
-                                    <a class="header__up-login-button" href="http://127.0.0.1:8000/login">
+                                    <a class="header__up-login-button" href="{% url 'login' %}">
                                         <svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <desc>
                                                     Created with Pixso.
@@ -393,7 +393,7 @@
                                     </svg>
                                 </li>
                                 <li class="main__nav-list-item-active">
-                                    <a href="../catalog"> Каталог </a>
+                                    <a href="{% url 'catalog' %}"> Каталог </a>
                                 </li>
                                 <li class="mian__nav-list-item-arrow">
                                     <svg
@@ -774,7 +774,7 @@
                                             </article>
                                         {% endfor %}
                                     </div>
-                                    <button onclick="window.location.href='../catalog/';" class="popular__goods-btn button slider__button">
+                                    <button onclick="window.location.href='{% url 'catalog' %}';" class="popular__goods-btn button slider__button">
                                         Смотреть больше товаров
                                     </button>
                                 </div>
@@ -890,7 +890,7 @@
                                             </article>
                                        {% endfor %}
                                     </div>
-                                    <button onclick="window.location.href='../catalog/';" class="popular__goods-btn button slider__button">
+                                    <button onclick="window.location.href='{% url 'catalog' %}';" class="popular__goods-btn button slider__button">
                                         Смотреть больше товаров
                                     </button>
                                 </div>
@@ -996,7 +996,7 @@
                                         </article>
                                     {% endfor %}
                                 </div>
-                                <button onclick="window.location.href='../articles/';" type="button" class="articles__button button">Читать больше статей</button>
+                                <button onclick="window.location.href='{% url 'articles' %}';" type="button" class="articles__button button">Читать больше статей</button>
                             </div>
                         </div>
                     </section>
@@ -1044,13 +1044,13 @@
                                         <a href="/"> Главная </a>
                                     </li>
                                     <li class="footer__list-item">
-                                        <a href="../catalog"> Каталог </a>
+                                        <a href="{% url 'catalog' %}"> Каталог </a>
                                     </li>
                                     <li class="footer__list-item">
-                                        <a href="#"> Акции </a>
+                                        <a href="{% url 'sales' %}"> Акции </a>
                                     </li>
                                     <li class="footer__list-item">
-                                        <a href="../articles"> Статьи </a>
+                                        <a href="{% url 'articles' %}"> Статьи </a>
                                     </li>
                                 </ul>
                             </nav>
@@ -1155,12 +1155,12 @@
                 </div>
             </footer>
         </div>
-        <script src="../static/cardProduct/js/burger.js"></script>
+        <script src="{% static '/cardProduct/js/burger.js' %}"></script>
         <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script defer src="../static/cardProduct/js/slick.min.js"></script>
-        <script defer src="../static/cardProduct/js/slider.js"></script>
-        <script src="../static/cardProduct/js/description.js"></script>
-        <script src="../static/cardProduct/js/weight.js"></script>
-        <script src="../static/cardProduct/js/aboutImg.js"></script>
+        <script defer src="{% static '/cardProduct/js/slick.min.js' %}"></script>
+        <script defer src="{% static '/cardProduct/js/slider.js' %}"></script>
+        <script src="{% static '/cardProduct/js/description.js' %} "></script>
+        <script src="{% static '/cardProduct/js/weight.js' %} "></script>
+        <script src="{% static '/cardProduct/js/aboutImg.js' %} "></script>
     </body>
 </html>

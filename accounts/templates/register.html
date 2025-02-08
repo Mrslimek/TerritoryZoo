@@ -47,7 +47,7 @@
                     <li class="buy__one-click-list-item">
                         <div class="buy__one-click-list-item-wrap">
                             <div class="buy__one-click-list-item-img">
-                                <img src="../static/Zoo/img/sliderImg.png" alt="">
+                                <img src="{% static '/Zoo/img/sliderImg.png' %}" alt="">
                             </div>
                             <div class="buy__one-click-list-item-action">
                                 <h3 class="buy__one-click-list-item-title">
@@ -348,7 +348,7 @@
                                         <img src="/media/user.svg" alt="">
                                     </a>
                                 {% else %}
-                                    <a class="header__up-login-button" href="http://127.0.0.1:8000/login">
+                                    <a class="header__up-login-button" href="{% url 'login' %}">
                                         <svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <desc>
                                                     Created with Pixso.
@@ -500,9 +500,9 @@
                                 {% endif %}
                             {% endfor %}
                         <div class="register-form-buttons">
-                            <a class="register-form-buttons-a" href="../login/">Вход</a>
+                            <a class="register-form-buttons-a" href="{% url 'login' %}">Вход</a>
                             <button type="submit">Регистрация</button>
-                            <a class="register-form-buttons-a" href="../reset_form">Забыли пароль?</a>
+                            <a class="register-form-buttons-a" href="{% url 'reset_form' %}">Забыли пароль?</a>
                         </div>
                     </form>
                 </div>
@@ -549,13 +549,13 @@
                                         <a href="/"> Главная </a>
                                     </li>
                                     <li class="footer__list-item">
-                                        <a href="../catalog"> Каталог </a>
+                                        <a href="{% url 'catalog' %}"> Каталог </a>
                                     </li>
                                     <li class="footer__list-item">
-                                        <a href="#"> Акции </a>
+                                        <a href="{% url 'sales' %}"> Акции </a>
                                     </li>
                                     <li class="footer__list-item">
-                                        <a href="../articles"> Статьи </a>
+                                        <a href="{% url 'articles' %}"> Статьи </a>
                                     </li>
                                 </ul>
                             </nav>
@@ -664,10 +664,10 @@
                 </div>
             </footer>
         </div>
-        <script src="../static/Zoo/js/burger.js"></script>
+        <script src="{% static '/Zoo/js/burger.js' %}"></script>
         <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script defer src="../static/Zoo/js/slick.min.js"></script>
-        <script defer src="../static/Zoo/js/slider.js"></script>
-        <script src="../static/Zoo/js/modals.js"></script>
+        <script defer src="{% static '/Zoo/js/slick.min.js' %}"></script>
+        <script defer src="{% static '/Zoo/js/slider.js' %}"></script>
+        <script src="{% static '/Zoo/js/modals.js' %}"></script>
     </body>
 </html>

@@ -49,7 +49,7 @@
                         <div class="buy__one-click-list-item-wrap">
                             <div class="buy__one-click-list-item-img">
                                 <img
-                                    src="../static/Zoo/img/sliderImg.png"
+                                    src="{% static '/Zoo/img/sliderImg.png' %}"
                                     alt=""
                                 />
                             </div>
@@ -600,10 +600,10 @@
                         {% endif %}
                         <div class="login-form-buttons">
                             <button>Вход</button>
-                            <a href="../register/" class="login-form-buttons-a"
+                            <a href="{% url 'register' %}" class="login-form-buttons-a"
                                 >Регистрация</a
                             >
-                            <a href="../reset_form" class="login-form-buttons-a"
+                            <a href="{% url 'reset_form' %}" class="login-form-buttons-a"
                                 >Забыли пароль?</a
                             >
                         </div>
@@ -658,13 +658,13 @@
                                         <a href="/"> Главная </a>
                                     </li>
                                     <li class="footer__list-item">
-                                        <a href="../catalog"> Каталог </a>
+                                        <a href="{% url 'catalog' %}"> Каталог </a>
                                     </li>
                                     <li class="footer__list-item">
                                         <a href="#"> Акции </a>
                                     </li>
                                     <li class="footer__list-item">
-                                        <a href="../articles"> Статьи </a>
+                                        <a href="{% url 'sales' %}"> Статьи </a>
                                     </li>
                                 </ul>
                             </nav>
@@ -789,13 +789,13 @@
                 </div>
             </footer>
         </div>
-        <script src="../static/Zoo/js/burger.js"></script>
+        <script src="{% static '/Zoo/js/burger.js' %}"></script>
         <script
             defer
             src="https://code.jquery.com/jquery-3.7.1.min.js"
         ></script>
-        <script defer src="../static/Zoo/js/slick.min.js"></script>
-        <script defer src="../static/Zoo/js/slider.js"></script>
-        <script src="../static/Zoo/js/modals.js"></script>
+        <script defer src="{% static '/Zoo/js/slick.min.js' %}"></script>
+        <script defer src="{% static '/Zoo/js/slider.js' %}"></script>
+        <script src="{% static '/Zoo/js/modals.js' %}"></script>
     </body>
 </html>
