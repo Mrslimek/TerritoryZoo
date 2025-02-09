@@ -465,23 +465,40 @@
                         <form class="user_controls" method="POST">
                             {% csrf_token %}
                             <p class="user_controls-title"><strong>Данные аккаунта</strong></p>
-                            <p style="font-size: xx-large;">ТУТ НЕПРАВИЛЬНО РАБОТАЕТ СОХРАНЕНИЕ. ИСПРАВЬ</p>
-                            {% for field in user_change_form %}
-                                <div class="user_controls-form">
-                                    {% if field.name != 'password1' and field.name != 'password2' %} 
-                                        <p>Сейчас:
-                                            <!-- фильтр has_attr возвращает булево значение, есть ли такой атрибут  -->
-                                            {% if user|has_attr:field.name %} 
-                                                            <!-- фильтр get_attr возвращает атрибут по названию поля в форме -->
-                                                <strong>{{ user|get_attr:field.name }}</strong>
-                                            {% else %}
-                                                <strong>Не указано</strong>
-                                            {% endif %}
-                                        </p>
-                                    {% endif %}
-                                    <p>{{ field.label }}: {{ field }}</p>
+                                <div class="user_controls-form"> 
+                                    <p>
+                                        Сейчас: {% if user.first_name %}<strong>{{ user.first_name }}</strong>{% else %}<strong>Не указано</strong>{% endif %}
+                                    </p>
+                                    <p>
+                                        {{ user_change_form.first_name.label }}: {{ user_change_form.first_name }}
+                                    </p>
                                 </div>
-                            {% endfor %}
+                                <div class="user_controls-form"> 
+                                    <p>
+                                        Сейчас: {% if user.last_name %}<strong>{{ user.last_name }}</strong>{% else %}<strong>Не указано</strong>{% endif %}
+                                    </p>
+                                    <p>
+                                        {{ user_change_form.last_name.label }}: {{ user_change_form.last_name }}
+                                    </p>
+                                </div>
+                                <div class="user_controls-form"> 
+                                    <p>
+                                        Сейчас: {% if user.email %}<strong>{{ user.email|censor_email }}</strong>{% else %}<strong>Не указано</strong>{% endif %}
+                                    </p>
+                                    <p>
+                                        {{ user_change_form.email.label }}: {{ user_change_form.email }}
+                                    </p>
+                                </div>
+                                <div class="user_controls-form"> 
+                                    <p>
+                                        {{ user_change_form.password1.label }}: {{ user_change_form.password1 }}
+                                    </p>
+                                </div>
+                                <div class="user_controls-form"> 
+                                    <p>
+                                        {{ user_change_form.password2.label }}: {{ user_change_form.password2 }}
+                                    </p>
+                                </div>
                             {% if message_user %}
                                 <p style="color: rgb(0, 160, 172);"><strong>{{message_user}}</strong></p>
                             {% endif %}

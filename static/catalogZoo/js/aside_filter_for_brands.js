@@ -13,6 +13,15 @@ select.addEventListener("click", () => {
     selectList.classList.toggle("catalog__sort-select-list-active");
 });
 
+let fetchUrl = 'http://127.0.0.1:8000/api/filtered_products/'
+fetch(fetchUrl)
+.then(response => response.json())
+.then(data => {
+        console.log(data)
+        renderProducts(data, fetchUrl)
+    }
+)
+
 //EventListener для момента, когда полностью загружен DOM
 document.addEventListener("DOMContentLoaded", function () {
     
@@ -67,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("orderByData", orderByData);
             let localStorageData = getLocalStorageData();
             filterProducts(
+                fetchUrl,
                 this.value,
                 localStorageData.brandIds.map((id) => parseInt(id, 10)),
                 localStorageData.promotion,
@@ -84,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const localStorageData = getLocalStorageData();
 
             filterProducts(
+                fetchUrl,
                 this.value,
                 localStorageData.brandIds.map((id) => parseInt(id, 10)),
                 localStorageData.promotion,
@@ -103,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const localStorageData = getLocalStorageData();
 
             filterProducts(
+                fetchUrl,
                 this.value,
                 localStorageData.brandIds.map((id) => parseInt(id, 10)),
                 localStorageData.promotion,
@@ -115,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Функция для fetch запроса
 function filterProducts(
+    fetchUrl,
     value,
     brandIds,
     promotion,
@@ -177,7 +190,7 @@ function filterProducts(
 
     console.log(bodyData);
 
-    fetch("http://127.0.0.1:8000/api/filtered_products/", {
+    fetch(fetchUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -196,7 +209,7 @@ function filterProducts(
         })
         .then((data) => {
             console.log(data);
-            renderProducts(data);
+            renderProducts(data, fetchUrl);
         })
         .catch((error) => {
             console.error("Ошибка:", error);
@@ -425,8 +438,7 @@ function renderProducts(data, fetchUrl) {
             productsPaginationListItem.onclick = (() => {
                 const page = i;  // Создаем новую переменную для замыкания
                 return () => {
-                    console.log(page);
-                    fetch(`${fetchUrl}/?page=${page}`)
+                    fetch(`${fetchUrl}?page=${page}`)
                         .then(response => response.json())
                         .then(data => renderProducts(data, fetchUrl));
                 };

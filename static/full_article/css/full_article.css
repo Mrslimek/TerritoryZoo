@@ -19,7 +19,12 @@
     }
 }
 
-.article_wrapper-image img{
-    max-width: 500px;
-    max-height: 500px;
+.article_wrapper-image {
+    & img{
+        width: 500px;
+        height: 250px;
+        border-radius: 20px;
+        border: 5px solid rgb(0, 160, 172);
+        margin-top: 15px;
+    }
 }

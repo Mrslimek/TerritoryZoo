@@ -94,27 +94,24 @@ class ResetForm(forms.Form):
     )
 
 
-class CustomUserChangeForm(forms.ModelForm):
-    password1 = forms.CharField(label='пароль', widget=forms.PasswordInput(attrs={
+class CustomUserChangeForm(forms.Form):
+    password1 = forms.CharField(label='Введите пароль', widget=forms.PasswordInput(attrs={
         'class': 'input_field',
         'placeholder': 'Введите пароль'
     }), required=False)
-    password2 = forms.CharField(label='пароль', widget=forms.PasswordInput(attrs={
+    password2 = forms.CharField(label='Подтвердите пароль', widget=forms.PasswordInput(attrs={
         'class': 'input_field',
         'placeholder': 'Подтвердите пароль'
     }), required=False)
-    first_name = forms.CharField(label='имя', widget=forms.TextInput(attrs={
+    first_name = forms.CharField(label='Введите имя', widget=forms.TextInput(attrs={
         'class': 'input_field'
     }), required=False)
-    last_name = forms.CharField(label='фамилия', widget=forms.TextInput(attrs={
+    last_name = forms.CharField(label='Введите фамилию', widget=forms.TextInput(attrs={
         'class': 'input_field'
     }), required=False)
-    email = forms.EmailField(label='Адрес электронной почты', widget=forms.TextInput(attrs={
+    email = forms.EmailField(label='Введите email', widget=forms.TextInput(attrs={
         'class': 'input_field'
     }), required=False)
-    class Meta:
-        model = User
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -123,20 +120,16 @@ class CustomUserChangeForm(forms.ModelForm):
             raise forms.ValidationError("Пароли не совпадают")
         return password2
     
-    def save(self):
-        print('РАБОТАЕТ SAVE')
-        print(self.cleaned_data.items(), 'CLEANED DATA ITEMS')
-
-        instance = self.instance
-
+    def save(self, instance, commit=True):
         for key, value in self.cleaned_data.items():
-            if key == 'password1' and value:
-                instance.set_password(value)
-            else: 
+            if key == 'password1':
                 if value:
-                    print(f'добавил atr - {value}')
+                    instance.set_password(value)
+            else:
+                if value:
                     setattr(instance, key, value)
-
+        if commit:
+            instance.save()
         return instance
 
 

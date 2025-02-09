@@ -26,7 +26,7 @@ def get_products_paginated(request):
 def get_products_filtered(request):
 
     filters = {}
-    fields = ['product_category', 'product_type', 'promotion', 'brand']
+    fields = ['product_category', 'product_type', 'brand']
 
     for field in fields:
         value = request.data.get(field)
@@ -38,7 +38,7 @@ def get_products_filtered(request):
             else:
                 filters[field] = value
     
-    if 'promotion' in filters:
+    if 'promotion' in request.data:
         products = Product.objects.filter(**filters).filter(promotion__isnull=False)
     else:
         products = Product.objects.filter(**filters)
@@ -48,7 +48,6 @@ def get_products_filtered(request):
 
     paginator = CustomPagination()
     page_obj = paginator.paginate_queryset(products, request)
-    print(page_obj)
 
     serializer = FilterProductSerializer(page_obj, many=True)
 

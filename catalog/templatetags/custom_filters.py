@@ -43,12 +43,16 @@ def censor_phone_number(phone):
     censored_phone = phone[:5] + ('*' * (len(phone[5:-2]))) + phone[-2:]
     return censored_phone
 
+# Возвращает имя аттрибута объекта
 @register.filter
 def get_attr(obj, attr_name):
+    print('РАБОТАЕТ GET_ATTR', attr_name , getattr(obj, attr_name))
     return getattr(obj, attr_name, None)
 
+# Возвращает булево значение, есть ли у объекта есть аттрибут
 @register.filter
 def has_attr(obj, attr_name):
+    print('РАБОТАЕТ HAS_ATTR', attr_name, hasattr(obj, attr_name))
     return hasattr(obj, attr_name)
 
 

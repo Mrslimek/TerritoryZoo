@@ -18,9 +18,9 @@ def profile(request):
 
     if request.method == 'POST':
         if 'user_change' in request.POST:
-            form_data = CustomUserChangeForm(request.POST, instance=user)
+            form_data = CustomUserChangeForm(request.POST)
             if form_data.is_valid():
-                form_data.save()
+                form_data.save(instance=user)
                 return render(request,'profile.html',context = {
                                                     'user_change_form': user_change_form,
                                                     'user_profile_change_form': user_profile_change_form,
