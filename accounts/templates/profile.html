@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{% static '/Zoo/css/null.css' %}" />
         <link rel="stylesheet" href="{% static '/profile/css/style.css' %}"/>
+        <link rel="stylesheet" href="{% static '/profile/css/main.css' %}"/>
         <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
         <title>Профиль</title>
     </head>
@@ -460,63 +461,85 @@
             </header>
             <main>
                 <div class="container">
-                    <h1 class="user__controls-title">Личный кабинет</h1>
-                    <div class="user__controls_wrapper">
-                        <form class="user_controls" method="POST">
-                            {% csrf_token %}
-                            <p class="user_controls-title"><strong>Данные аккаунта</strong></p>
-                                <div class="user_controls-form"> 
-                                    <p>
-                                        Сейчас: {% if user.first_name %}<strong>{{ user.first_name }}</strong>{% else %}<strong>Не указано</strong>{% endif %}
-                                    </p>
-                                    <p>
-                                        {{ user_change_form.first_name.label }}: {{ user_change_form.first_name }}
-                                    </p>
+                    <h1 class="user-controls__title">Личный кабинет</h1>
+                    <div class="user-controls__wrapper">
+                        <div class="user-controls__left">
+                            <form class="user-controls__form" method="POST">
+                                {% csrf_token %}
+                                <p class="user-controls__subtitle"><strong>Данные аккаунта</strong></p>
+                                <div class="user-controls__fields">
+                                    <div class="user-controls__field">
+                                        <p>Сейчас:</p>
+                                        <span>{% if user.first_name %}<strong>{{ user.first_name }}</strong>{% else %}<strong>Не указано</strong>{% endif %}</span>
+                                        <p>{{ user_change_form.first_name.label }}:</p>
+                                        {{ user_change_form.first_name }}
+                                    </div>
+                                    <div class="user-controls__field">
+                                        <p>Сейчас:</p>
+                                        <span>{% if user.last_name %}<strong>{{ user.last_name }}</strong>{% else %}<strong>Не указано</strong>{% endif %}</span>
+                                        <p>{{ user_change_form.last_name.label }}:</p>
+                                        {{ user_change_form.last_name }}
+                                    </div>
+                                    <div class="user-controls__field">
+                                        <p>Сейчас:</p>
+                                        <span>{% if user.email %}<strong>{{ user.email|censor_email }}</strong>{% else %}<strong>Не указано</strong>{% endif %}</span>
+                                        <p>{{ user_change_form.email.label }}:</p>
+                                        {{ user_change_form.email }}
+                                    </div>
+                                    <div class="user-controls__field">
+                                        <p>{{ user_change_form.password1.label }}:</p>
+                                        {{ user_change_form.password1 }}
+                                    </div>
+                                    <div class="user-controls__field">
+                                        <p>{{ user_change_form.password2.label }}:</p>
+                                        {{ user_change_form.password2 }}
+                                    </div>
                                 </div>
-                                <div class="user_controls-form"> 
-                                    <p>
-                                        Сейчас: {% if user.last_name %}<strong>{{ user.last_name }}</strong>{% else %}<strong>Не указано</strong>{% endif %}
-                                    </p>
-                                    <p>
-                                        {{ user_change_form.last_name.label }}: {{ user_change_form.last_name }}
-                                    </p>
+                                {% if message_user %}
+                                    <p class="user-controls__message"><strong>{{ message_user }}</strong></p>
+                                {% endif %}
+                                <button class="button" name="user_change">Сохранить</button>
+                            </form>
+            
+                            <form class="user-controls__form" method="POST">
+                                {% csrf_token %}
+                                <p class="user-controls__subtitle"><strong>Данные профиля</strong></p>
+                                <div class="user-controls__fields">
+                                    <div class="user-controls__field">
+                                        <label>Текущий номер телефона:</label>
+                                        <span>{% if profile.phone_number %}{{ profile.phone_number|censor_phone_number }}{% else %}<strong>Не указано</strong>{% endif %}</span>
+                                        <label>{{ user_profile_change_form.phone_number.label }}:</label>
+                                        {{ user_profile_change_form.phone_number }}
+                                    </div>
+                                    <div class="user-controls__field">
+                                        <label>Текущая дата рождения:</label>
+                                        <span>{% if profile.date_of_birth %}{{ profile.date_of_birth }}{% else %}<strong>Не указано</strong>{% endif %}</span>
+                                        <label>{{ user_profile_change_form.date_of_birth.label }}:</label>
+                                        {{ user_profile_change_form.date_of_birth }}
+                                    </div>
                                 </div>
-                                <div class="user_controls-form"> 
-                                    <p>
-                                        Сейчас: {% if user.email %}<strong>{{ user.email|censor_email }}</strong>{% else %}<strong>Не указано</strong>{% endif %}
-                                    </p>
-                                    <p>
-                                        {{ user_change_form.email.label }}: {{ user_change_form.email }}
-                                    </p>
+                                {% if message_profile %}
+                                    <p class="user-controls__message"><strong>{{ message_profile }}</strong></p>
+                                {% endif %}
+                                <button class="button" name="profile_change">Сохранить</button>
+                            </form>
+                        </div>
+            
+                        <!-- Вертикальный разделитель -->
+                        <div class="user-controls__divider"></div>
+            
+                        <div class="user-controls__right">
+                            <form class="user-controls__form" method="POST">
+                                <p class="user-controls__subtitle"><strong>Адрес доставки</strong></p>
+                                <div class="user-controls__fields">
+                                    {{ user_profile_address_form }}
                                 </div>
-                                <div class="user_controls-form"> 
-                                    <p>
-                                        {{ user_change_form.password1.label }}: {{ user_change_form.password1 }}
-                                    </p>
-                                </div>
-                                <div class="user_controls-form"> 
-                                    <p>
-                                        {{ user_change_form.password2.label }}: {{ user_change_form.password2 }}
-                                    </p>
-                                </div>
-                            {% if message_user %}
-                                <p style="color: rgb(0, 160, 172);"><strong>{{message_user}}</strong></p>
-                            {% endif %}
-                            <button class="button" name="user_change">Сохранить</button>
-                        </form>
-                        <form class="user_controls" method="POST">
-                            {% csrf_token %}
-                            <p class="user_controls-title"><strong>Данные профиля</strong></p>
-                            <div class="user_controls-form">
-                                <p>Текущий номер телефона: {% if profile.phone_number %}{{profile.phone_number|censor_phone_number}}{% endif %}</p>
-                                <p>{{user_profile_change_form.phone_number.label}}: {{user_profile_change_form.phone_number}}</p>
-                            </div>
-                            {% if message_profile %}
-                                <p style="color: rgb(0, 160, 172);"><strong>{{message_profile}}</strong></p>
-                            {% endif %}
-                            <button class="button" name="profile_change">Сохранить</button>
-                        </form>
+                                <button class="button" name="user_profile_address">Сохранить</button>
+                            </form>
+                            <h1>ЗДЕСЬ СДЕЛАТЬ СПИСОК АДРЕСОВ ПОЛЬЗОВАТЕЛЯ</h1>
+                        </div>
                     </div>
+                    <button class="button button--logout" onclick="window.location.href='{% url 'logout' %}'">Выйти из аккаунта</button>
                 </div>
             </main>
             <footer>

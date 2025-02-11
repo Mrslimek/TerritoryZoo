@@ -10,11 +10,12 @@ from catalog.forms import SearchForm
 @login_required
 def profile(request):
 
+    user = request.user
     user_change_form = CustomUserChangeForm()
     user_profile_change_form = UserProfileChangeForm()
-    user = request.user
-    profile = UserProfile.objects.get(user=user)
+    user_profile_address_form = UserProfileAddressForm()
 
+    profile = UserProfile.objects.get(user=user)
 
     if request.method == 'POST':
         if 'user_change' in request.POST:
@@ -46,6 +47,7 @@ def profile(request):
     context = {
         'user_change_form': user_change_form,
         'user_profile_change_form': user_profile_change_form,
+        'user_profile_address_form': user_profile_address_form,
         'profile': profile,
         'user': user
     }

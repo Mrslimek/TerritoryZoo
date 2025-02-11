@@ -144,4 +144,24 @@ class UserProfileChangeForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['phone_number', 'date_of_birth']
-        
+
+
+class UserProfileAddressForm(forms.Form):
+    city = forms.CharField(label='Город', widget=forms.TextInput(attrs={
+        'class': 'input_field',
+    }))
+    street = forms.CharField(label='Улица/Переулок', widget=forms.TextInput(attrs={
+        'class': 'input_field'
+    }))
+    house_num = forms.CharField(label='Номер дома', widget=forms.TextInput(attrs={
+        'class': 'input_field'
+    }))
+    entrance_num = forms.CharField(label='Номер подъезда', widget=forms.TextInput(attrs={
+        'class': 'input_field'
+    }))
+    apartment_num = forms.CharField(label='Номер квартиры', widget=forms.TextInput(attrs={
+        'class': 'input_field'
+    }))
+    postal_code = forms.CharField(label='Почтовый индекс', widget=forms.TextInput(attrs={
+        'class': 'input_field'
+    }))

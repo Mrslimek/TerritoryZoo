@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'api',
     'accounts',
     'basket',
+    'orders',
 ]
 
 MIDDLEWARE = [
