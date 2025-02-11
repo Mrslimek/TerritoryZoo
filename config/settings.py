@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'catalog',
     'api',
     'accounts',
+    'basket',
 ]
 
 MIDDLEWARE = [
