@@ -104,13 +104,16 @@ class CustomUserChangeForm(forms.Form):
         'placeholder': 'Подтвердите пароль'
     }), required=False)
     first_name = forms.CharField(label='Введите имя', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': 'Александр'
     }), required=False)
     last_name = forms.CharField(label='Введите фамилию', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': 'Пушкин'
     }), required=False)
     email = forms.EmailField(label='Введите email', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': 'example@domain.com'
     }), required=False)
 
     def clean_password2(self):
@@ -135,7 +138,8 @@ class CustomUserChangeForm(forms.Form):
 
 class UserProfileChangeForm(forms.ModelForm):
     phone_number = forms.CharField(label='Номер телефона', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': '+375#########'
     }), required=False)
     date_of_birth = forms.DateField(label='Дата рождения', widget=forms.TextInput(attrs={
         'class': 'input_field',
@@ -149,19 +153,38 @@ class UserProfileChangeForm(forms.ModelForm):
 class UserProfileAddressForm(forms.Form):
     city = forms.CharField(label='Город', widget=forms.TextInput(attrs={
         'class': 'input_field',
+        'placeholder': 'Минск'
     }))
     street = forms.CharField(label='Улица/Переулок', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': 'Пушкина'
     }))
     house_num = forms.CharField(label='Номер дома', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': '47'
     }))
     entrance_num = forms.CharField(label='Номер подъезда', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': '7'
     }))
     apartment_num = forms.CharField(label='Номер квартиры', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': '6'
     }))
     postal_code = forms.CharField(label='Почтовый индекс', widget=forms.TextInput(attrs={
-        'class': 'input_field'
+        'class': 'input_field',
+        'placeholder': '123456'
     }))
+
+
+    def save(self, instance):
+
+        profile_address = UserProfileAddress()
+        for key, value in self.cleaned_data.items():
+            if value:
+                setattr(profile_address, key, value)
+
+        setattr(profile_address, 'profile_id', instance.id)
+        profile_address.save()
+
+        return profile_address

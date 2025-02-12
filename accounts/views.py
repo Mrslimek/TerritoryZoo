@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
+from django.http import HttpResponseRedirect
 #Project
 from .forms import *
 from .models import *
@@ -11,11 +12,15 @@ from catalog.forms import SearchForm
 def profile(request):
 
     user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    user_profile_address = 'Пока что нет адресов'
+
+    if UserProfileAddress.objects.filter(profile=user_profile):
+        user_profile_address = UserProfileAddress.objects.filter(profile=user_profile)
+    
     user_change_form = CustomUserChangeForm()
     user_profile_change_form = UserProfileChangeForm()
     user_profile_address_form = UserProfileAddressForm()
-
-    profile = UserProfile.objects.get(user=user)
 
     if request.method == 'POST':
         if 'user_change' in request.POST:
@@ -30,7 +35,6 @@ def profile(request):
 
 
         if 'profile_change' in request.POST:
-            user_profile = UserProfile.objects.get(user=user)
             form_data = UserProfileChangeForm(request.POST)
             if form_data.is_valid():
                 if form_data.cleaned_data['phone_number']:
@@ -44,11 +48,17 @@ def profile(request):
                                                                  'message_profile': 'Данные успешно сохранены'
                                                              }) 
 
+        if 'user_profile_address_add' in request.POST:
+            user_address = UserProfileAddressForm(request.POST)
+            if user_address.is_valid():
+                user_address.save(instance=user_profile)
+
     context = {
         'user_change_form': user_change_form,
         'user_profile_change_form': user_profile_change_form,
         'user_profile_address_form': user_profile_address_form,
-        'profile': profile,
+        'user_profile_address': user_profile_address,
+        'profile': user_profile,
         'user': user
     }
 
@@ -123,3 +133,10 @@ def reset_password(request):
                 context['message'] = message
 
     return render(request, 'reset_form.html', context)
+
+def delete_user_profile_address(request, address_id):
+
+    user_profile_address = UserProfileAddress.objects.get(id=address_id)
+    user_profile_address.delete()
+
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

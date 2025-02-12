@@ -2,6 +2,8 @@
   max-width: 1200px;
   padding: 0 10px;
   margin: 0 auto;
+  font-family: 'SF Pro Text', sans-serif;
+  color: #000000; /* Цвет шрифта чёрный */
 }
 
 @media (min-width: 992px) {
@@ -2678,4 +2680,4 @@ footer {
   padding: 2px;
 } */
 
-/*# sourceMappingURL=style.css.map */
+/* # sourceMappingURL=style.css.map */

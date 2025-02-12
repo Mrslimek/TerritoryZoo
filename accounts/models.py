@@ -14,9 +14,13 @@ class UserProfile(models.Model):
 
 class UserProfileAddress(models.Model):
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name='Профиль пользователя')
-    city = models.CharField(blank=True, null=True, verbose_name='Город',)
-    street = models.CharField(blank=True, null=True, verbose_name='Улица/Переулок')
-    house_num = models.CharField(blank=True, null=True, verbose_name='Номер дома')
+    city = models.CharField(verbose_name='Город',)
+    street = models.CharField(verbose_name='Улица/Переулок')
+    house_num = models.CharField(verbose_name='Номер дома')
     entrance_num = models.CharField(blank=True, null=True, verbose_name='Номер подъезда')
     apartment_num = models.CharField(blank=True, null=True, verbose_name='Номер квартиры')
-    postal_code = models.CharField(blank=True, null=True, verbose_name='Почтовый индекс')
+    postal_code = models.CharField(verbose_name='Почтовый индекс')
+
+
+    def __str__(self):
+        return f'г. {self.city}, {self.street}, д.{self.house_num}, под. {self.entrance_num}, кв. {self.apartment_num}, {self.postal_code}'
