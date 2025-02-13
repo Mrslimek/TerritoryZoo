@@ -396,7 +396,7 @@
                                     </div>
                                         <h2 class="header__logo-text">Территория <span>ZOO</span></h2>
                                 </div></a>
-                                <form class="header__bottom-search" action="{% url 'search_results'  %}">
+                                <form class="header__bottom-search" action="{% url 'search_results' %}">
                                     <button style="background-color: white;" class="header__bottom-search-img">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -1425,6 +1425,7 @@
         <script defer src="{% static '/Zoo/js/slider.js' %}"></script>
         <script src="{% static '/Zoo/js/modals.js' %}"></script>
         <script src="{% static '/Zoo/js/chooseWeight.js' %}"></script>
+        <script src="{% static 'searchStorage.js' %}"></script>
         <!-- <script src="{% static '/Zoo/js/basket.js' %}"></script> -->
     </body>
 </html>

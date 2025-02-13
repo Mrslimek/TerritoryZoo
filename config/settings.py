@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -140,8 +141,7 @@ STATICFILES_DIRS = [
     BASE_DIR/'static'
     ]
 
-
-LOGIN_URL = '/login/'
+# LOGIN_URL = reverse('login')
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',

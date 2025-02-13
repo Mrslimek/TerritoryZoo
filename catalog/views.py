@@ -85,9 +85,7 @@ def catalog(request):
     categories = ProductCategory.objects.all()
     products = Product.objects.all()
     prods_by_popularity = products.order_by('-popularity')
-    choices = ProductType.objects.all()
     brands = Brand.objects.all()
-    promotion = Promotion.objects.all()
     articles = Article.objects.all()
     user = request.user
     cart_items_count = 0
@@ -103,9 +101,7 @@ def catalog(request):
         'search_form': search_form,
         'products': products,
         'prods_by_popularity': prods_by_popularity,
-        'choices': choices,
         'brands': brands,
-        'promotion': promotion,
         'categories': categories,
         'page_obj': page_obj,
         'articles': articles,
@@ -174,6 +170,30 @@ def brands(request):
 
     return render(request, 'catalogZoo.html', context)
 
+def search_results(request):
+
+    search_form = SearchForm()
+        
+    context = {}
+
+    categories = ProductCategory.objects.all()
+    products = Product.objects.all()
+    prods_by_popularity = products.order_by('-popularity')
+    articles = Article.objects.all()
+
+    context.update({
+        'search_form': search_form,
+        'categories': categories,
+        'products': products,
+        'prods_by_popularity': prods_by_popularity,
+        'articles': articles
+    })
+
+    if request.user.is_authenticated:
+        cart_items_count = CartItem.objects.filter(user=request.user).count()
+        context['cart_items_count'] = cart_items_count
+
+    return render(request, 'search.html', context)
 
 def articles(request):
 
@@ -238,46 +258,3 @@ def get_full_article(request, article_id):
 
     return render(request, 'full_article.html', context)
 
-def search_products(request):
-
-    search_form = SearchForm()
-
-    categories = ProductCategory.objects.all()
-    products = Product.objects.all()
-    prods_by_popularity = products.order_by('-popularity')
-    choices = ProductType.objects.all()
-    brands = Brand.objects.all()
-    promotion = Promotion.objects.all()
-    articles = Article.objects.all()
-    user = request.user
-    cart_items_count = 0
-
-    if user.is_authenticated:
-        cart_items_count = CartItem.objects.filter(user=request.user).count()
-
-    paginator = Paginator(products, 15)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    query = request.GET.get('query')
-    if query:
-        search_results = Product.objects.filter(title__icontains=query)
-    else:
-        message = 'По вашему запросу ничего не найдено'
-        search_results = Product.objects.all()
-
-    context = {
-        'search_form': search_form,
-        'products': products,
-        'prods_by_popularity': prods_by_popularity,
-        'choices': choices,
-        'brands': brands,
-        'promotion': promotion,
-        'categories': categories,
-        'page_obj': page_obj,
-        'products': search_results,
-        'articles': articles,
-        'cart_items_count': cart_items_count
-    }
-
-    return render(request, 'search.html', context)

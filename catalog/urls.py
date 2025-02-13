@@ -12,6 +12,6 @@ urlpatterns = [
     path('brands/', brands, name='brands'),
     path('articles/', articles, name='articles'),
     path('full_article/<int:article_id>', get_full_article, name='full_article'),
-    path('results/', search_products, name='search_results'),
+    path('search/', search_results, name='search_results'),
     path('sales/', sales, name='sales'),
 ]

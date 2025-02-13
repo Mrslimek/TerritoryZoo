@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 #Project
 from .serializers import *
 from .pagination import CustomPagination
+from catalog.forms import SearchForm
 import json
 
 # Create your views here.
@@ -52,3 +53,37 @@ def get_products_filtered(request):
     serializer = FilterProductSerializer(page_obj, many=True)
 
     return paginator.get_paginated_response(serializer.data)
+
+
+@api_view(['POST'])
+def search_products(request):
+
+    if request.method == 'POST':
+
+        query = request.data
+
+        if query:
+
+            search_results = Product.objects.filter(title__icontains=query)
+
+            if search_results:
+
+                brands = {item.brand for item in search_results}
+                brand_serializer = BrandSerializer(brands, many=True)
+
+                paginator = CustomPagination()
+                page_obj = paginator.paginate_queryset(search_results, request)
+                product_serializer = FilterProductSerializer(page_obj, many=True)
+
+                response_data = {
+                    'brands': brand_serializer.data,
+                    'results': product_serializer.data
+                }
+                return paginator.get_paginated_response(response_data)
+            
+            else:
+
+                message = 'По вашему запросу ничего не найдено'
+                return Response(message)
+            
+        return Response('Данные некорректны')

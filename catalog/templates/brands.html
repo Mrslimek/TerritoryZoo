@@ -254,7 +254,7 @@
                                 </div>
                                 <h2 class="header__logo-text">Территория <span>ZOO</span></h2>
                             </div></a>
-                            <form class="header__bottom-search" action="{% url 'search_results'  %}">
+                            <form class="header__bottom-search" action="{% url 'api_search'  %}">
                                 <button style="background-color: white;" class="header__bottom-search-img">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -573,6 +573,7 @@
     <script defer src="{% static '/brands/js/slick.min.js' %}"></script>
     <script defer src="{% static '/brands/js/slider.js' %}"></script>
     <script src="{% static '/brands/js/burger.js' %}"></script>
+    <script src="{% static 'searchStorage.js' %}"></script>
     <!-- <script src="{% static '/brands/js/basket.js' %}"></script> -->
 </body>
 </html>

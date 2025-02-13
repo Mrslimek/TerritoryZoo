@@ -1927,4 +1927,10 @@ footer {
   color: #fff;
 }
 
+.message {
+  text-align: center;
+  color: rgb(0, 160, 172);
+  font-family: 'SF Pro Text', sans-serif;
+  font-size: 20px;
+}
 /*# sourceMappingURL=style.css.map */

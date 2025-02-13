@@ -13,7 +13,7 @@ def profile(request):
 
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
-    user_profile_address = 'Пока что нет адресов'
+    user_profile_address = ['Пока что нет адресов']
 
     if UserProfileAddress.objects.filter(profile=user_profile):
         user_profile_address = UserProfileAddress.objects.filter(profile=user_profile)
@@ -32,7 +32,6 @@ def profile(request):
                                                     'user_profile_change_form': user_profile_change_form,
                                                     'message_user': 'Данные успешно сохранены'
                                                 })      
-
 
         if 'profile_change' in request.POST:
             form_data = UserProfileChangeForm(request.POST)
