@@ -254,7 +254,7 @@
                                     </div>
                                     <h2 class="header__logo-text">Территория <span>ZOO</span></h2>
                                 </div></a>
-                                <form class="header__bottom-search" action="{% url 'api_search'  %}">
+                                <form class="header__bottom-search" action="{% url 'search_results' %}">
                                     <button style="background-color: white;" class="header__bottom-search-img">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -584,9 +584,15 @@
                                                 +
                                             </button>
                                         </div>
-                                        <button class="about__product-basket-btn" onclick="window.location.href='{% url 'add_to_cart' product.id %}'">
-                                            Добавить в корзину
-                                        </button>
+                                        {% if user.is_authenticated %}
+                                            <button class="about__product-basket-btn" onclick="window.location.href='{% url 'add_to_cart' product.id %}'">
+                                                Добавить в корзину
+                                            </button>
+                                        {% else %}
+                                            <button class="about__product-basket-btn" onclick="window.location.href='{% url 'login' %}'">
+                                                Добавить в корзину
+                                            </button>
+                                        {% endif %}
                                         <p class="about__product-buy">
                                             Купить в 1 клик
                                         </p>

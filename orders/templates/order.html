@@ -5,12 +5,155 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="{% static '/catalogZoo/css/null.css' %}" />
-        <link rel="stylesheet" href="{% static '/catalogZoo/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static '/Zoo/css/null.css' %}" />
+        <link rel="stylesheet" href="{% static '/profile/css/style.css' %}"/>
+        <link rel="stylesheet" href="{% static '/order_page/style.css' %}"/>
         <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
-        <title>Каталог</title>
+        <title>Профиль</title>
     </head>
     <body>
+        <div class="modal__wrap">
+            <form class="callback">
+                <h2 class="callback__title">
+                    Перезвоним вам в течение 15 минут
+                </h2>
+                <div class="callback__field">
+                    <div class="callback__field-item">
+                        <h3 class="callback__field-item-title">
+                            Имя
+                        </h3>
+                        <input type="text" name="name" placeholder="Иванов Иван Иванович">
+                    </div>
+                    <div class="callback__field-item">
+                        <h3 class="callback__field-item-title">
+                            Номер телефона
+                        </h3>
+                        <input type="tel" name="phone" placeholder="+375 ___-__-__">
+                    </div>
+                </div>
+                <button type="button" class="button">
+                    Отправить
+                </button>
+                <p class="callback__personal-data">
+                    Нажимая на кнопку вы даёте согласие на обработку <a href="#">персональных данных</a>
+                </p>
+                <div class="cross">
+                    
+                </div>
+            </form>
+            <form class="buy__one-click">
+                <h2 class="buy__one-click-title">
+                    Оформление заказа в 1 клик
+                </h2>
+                <ul class="buy__one-click-list">
+                    <li class="buy__one-click-list-item">
+                        <div class="buy__one-click-list-item-wrap">
+                            <div class="buy__one-click-list-item-img">
+                                <img src="{% static '/Zoo/img/sliderImg.png' %}" alt="">
+                            </div>
+                            <div class="buy__one-click-list-item-action">
+                                <h3 class="buy__one-click-list-item-title">
+                                    Консервы ROYAL CANIN STERILISED для взрослых кастрированных котов..
+                                </h3>
+                                <ul class="buy__one-click-list-item-weight-list">
+                                    <li class="buy__one-click-list-item-weight-list-item">
+                                        0,2 кг.
+                                    </li>
+                                    <li class="buy__one-click-list-item-weight-list-item">
+                                        0,4 кг.
+                                    </li>
+                                    <li class="buy__one-click-list-item-weight-list-item">
+                                        1,2 кг.
+                                    </li>
+                                    <li class="buy__one-click-list-item-weight-list-item">
+                                        2 кг.
+                                    </li>
+                                    <li class="buy__one-click-list-item-weight-list-item">
+                                        4 кг.
+                                    </li>
+                                </ul>
+                                <div class="buy__one-click-list-item-wrap-weight-wrap">
+                                    <h4 class="buy__one-click-list-item-wrap-weight-title">
+                                        Указать свой вес
+                                    </h4>
+                                    <div class="buy__one-click-list-item-wrap-weight">
+                                        <input type="text" name="weight" id="" placeholder="Укажите вес">
+                                        <button type="button">
+                                            Применить
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="buy__one-click-list-item-quantity">
+                                <div class="buy__one-click-list-item-quantity-wrap">
+                                    <button type="button" class="minus">
+                                        -
+                                    </button>
+                                    <div>
+                                        1
+                                    </div>
+                                    <button type="button" class="plus">
+                                        +
+                                    </button>
+                                </div>
+                                <p>
+                                    24 BYN
+                                </p>
+                            </div>
+                        </div>
+                        <div class="buy__one-click-list-item-line"></div>
+                        <div class="buy__one-click-list-item-text">
+                            Заполните данные и нажмите кнопку «Оформить заказ». Товар будет ждать вас по адресу: Минск, ул. Чюрлёниса, 6.
+                        </div>
+                        <div class="buy__one-click-list-item-field-wrap">
+                            <div class="buy__one-click-list-item-field">
+                                <h3 class="buy__one-click-list-item-field-title">
+                                    Имя
+                                </h3>
+                                <input type="text" name="name" id="" placeholder="Иванов Иван Иванович">
+                            </div>
+                            <div class="buy__one-click-list-item-field">
+                                <h3 class="buy__one-click-list-item-field-title">
+                                    Номер телефона
+                                </h3>
+                                <input type="text" name="name" id="" placeholder="+375 ___-__-__">
+                            </div>
+                        </div>
+                        <button class="button">
+                            Оформить заказ
+                        </button>    
+                        <p class="buy__one-click-list-item-personal-data">
+                            Нажимая на кнопку вы даёте согласие на обработку <a href="#">персональных данных</a>
+                        </p>
+                    </li>
+                </ul>
+                <div class="cross"></div>
+            </form>
+            <div class="access__callback">
+                <div class="acceess__img">
+                    <svg width="48.000000" height="48.000000" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <defs>
+                            <clipPath id="clip893_6554">
+                                <rect id="Checkmark Circle" width="48.000000" height="48.000000" fill="white" fill-opacity="0"/>
+                            </clipPath>
+                        </defs>
+                        <g clip-path="url(#clip893_6554)">
+                            <path id="Shape" d="M24 4C35.0459 4 44 12.9543 44 24C44 35.0457 35.0459 44 24 44C12.9541 44 4 35.0457 4 24C4 12.9543 12.9541 4 24 4ZM32.6338 17.6162C32.1787 17.1604 31.458 17.1301 30.9678 17.5249L30.8662 17.6162L20.75 27.7322L17.1338 24.1162C16.6455 23.6279 15.8545 23.6279 15.3662 24.1162C14.9102 24.5718 14.8799 25.2915 15.2754 25.7825L15.3662 25.8838L19.8662 30.3838C20.3213 30.8396 21.042 30.8699 21.5322 30.4751L21.6338 30.3838L32.6338 19.3838C33.1221 18.8958 33.1221 18.1042 32.6338 17.6162Z" fill="#008060" fill-opacity="1.000000" fill-rule="nonzero"/>
+                        </g>
+                    </svg>                    
+                </div>
+                <h3 class="access__title">
+                    Мы получили вашу заявку
+                </h3>
+                <div class="access__sub-title">
+                    Ожидайте звонка в течение 15 минут
+                </div>
+                <button class="button" type="button">
+                    Понятно, жду
+                </button>
+                <div class="cross"></div>
+            </div>
+        </div>
         <div class="wrapper">
             <header>
                 <div class="header__wrapper">
@@ -253,31 +396,12 @@
                                             </defs>
                                         </svg>
                                     </div>
-                                    <h2 class="header__logo-text">Территория <span>ZOO</span></h2>
+                                        <h2 class="header__logo-text">Территория <span>ZOO</span></h2>
                                 </div></a>
-                                <form class="header__bottom-search" action="{% url 'search_results' %}">
-                                    <button style="background-color: white;" class="header__bottom-search-img">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="21"
-                                                viewBox="0 0 20 21"
-                                                fill="none"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M8 12.1299C5.791 12.1299 4 10.3389 4 8.12988C4 5.92088 5.791 4.12988 8 4.12988C10.209 4.12988 12 5.92088 12 8.12988C12 10.3389 10.209 12.1299 8 12.1299ZM17.707 16.4229L12.887 11.6029C13.585 10.6219 14 9.42588 14 8.12988C14 4.81688 11.313 2.12988 8 2.12988C4.687 2.12988 2 4.81688 2 8.12988C2 11.4429 4.687 14.1299 8 14.1299C9.296 14.1299 10.492 13.7149 11.473 13.0169L16.293 17.8369C16.488 18.0319 16.744 18.1299 17 18.1299C17.256 18.1299 17.512 18.0319 17.707 17.8369C18.098 17.4459 18.098 16.8139 17.707 16.4229Z"
-                                                    fill="#5C5F62"
-                                                />
-                                            </svg>
-                                    </button>
-                                    {{search_form.query}}
-                                </form>
                                 <nav class="header__bottom-nav">
                                     <ul class="header__bottom-nav-list">
                                         <li class="header__bottom-nav-item">
-                                            <a href="/"> Главная </a>
+                                            <a href="/">Главная </a>
                                         </li>
                                         <li class="header__bottom-nav-item">
                                             <a href="{% url 'catalog' %}"> Каталог </a>
@@ -290,37 +414,6 @@
                                         </li>
                                     </ul>
                                 </nav>
-                                <a href="{% url 'basket' %}"><div class="header__bottom-basket">
-                                    <div>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="20"
-                                            height="21"
-                                            viewBox="0 0 20 21"
-                                            fill="none"
-                                        >
-                                            <g clip-path="url(#clip0_5470_872)">
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M1 1.12988C1 0.577598 1.44932 0.129883 2.00358 0.129883H3.50894C4.34034 0.129883 5.01431 0.801455 5.01431 1.62988V2.19043L17.5883 3.09806C18.4651 3.15266 19.1089 3.94069 18.9846 4.80727L18.1194 10.842C18.0135 11.581 17.3783 12.1299 16.6292 12.1299H5.01431V14.1299H15.0572C16.72 14.1299 18.068 15.473 18.068 17.1299C18.068 18.7867 16.72 20.1299 15.0572 20.1299C13.3945 20.1299 12.0465 18.7867 12.0465 17.1299C12.0465 16.7792 12.1069 16.4427 12.2178 16.1299H6.85015C6.9611 16.4427 7.02147 16.7792 7.02147 17.1299C7.02147 18.7867 5.67352 20.1299 4.01073 20.1299C2.34795 20.1299 1 18.7867 1 17.1299C1 15.8237 1.83779 14.7124 3.00716 14.3006V3.13912C3.00711 3.13361 3.00711 3.12809 3.00716 3.12256V2.12988H2.00358C1.44932 2.12988 1 1.68217 1 1.12988ZM5.01431 4.19433V10.1299H16.194L16.9208 5.06039L5.01431 4.19433ZM14.0537 17.1299C14.0537 16.5776 14.503 16.1299 15.0572 16.1299C15.6115 16.1299 16.0608 16.5776 16.0608 17.1299C16.0608 17.6822 15.6115 18.1299 15.0572 18.1299C14.503 18.1299 14.0537 17.6822 14.0537 17.1299ZM3.00716 17.1299C3.00716 16.5776 3.45647 16.1299 4.01073 16.1299C4.56499 16.1299 5.01431 16.5776 5.01431 17.1299C5.01431 17.6822 4.56499 18.1299 4.01073 18.1299C3.45647 18.1299 3.00716 17.6822 3.00716 17.1299Z"
-                                                    fill="#5C5F62"
-                                                />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_5470_872">
-                                                    <rect
-                                                        width="20"
-                                                        height="20"
-                                                        fill="white"
-                                                        transform="translate(0 0.129883)"
-                                                    />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </div>
-                                    <p>{{cart_items_count}}</p>
-                                </div></a>
                                 <div class="header__bottom-action">
                                     <div class="header__bottom-search-mob">
                                         <svg
@@ -367,451 +460,69 @@
                 </div>
             </header>
             <main>
-                <div class="main__wrapper">
-                    <nav class="main__nav">
-                        <div class="container">
-                            <ul class="main__nav-list">
-                                <li class="main__nav-list-item">
-                                    <a href="/"> Главная </a>
-                                </li>
-                                <li class="mian__nav-list-item-arrow">
-                                    <svg
-                                        width="20.000000"
-                                        height="20.000000"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    >
-                                        <defs />
-                                        <path
-                                            id="Primary fill"
-                                            d="M8.00049 16C7.74414 16 7.48828 15.902 7.29346 15.707C6.90234 15.316 6.90234 14.684 7.29346 14.293L11.5864 10L7.29346 5.707C6.90234 5.316 6.90234 4.684 7.29346 4.293C7.68408 3.902 8.31641 3.902 8.70703 4.293L13.707 9.293C14.0981 9.684 14.0981 10.316 13.707 10.707L8.70703 15.707C8.51221 15.902 8.25635 16 8.00049 16Z"
-                                            fill="#5C5F62"
-                                            fill-opacity="1.000000"
-                                            fill-rule="evenodd"
-                                        />
-                                    </svg>
-                                </li>
-                                <li class="main__nav-list-item-active">
-                                    <a href="{% url 'catalog' %}"> Каталог </a>
-                                </li>
-                            </ul>
+                <div class="container">
+                    <div class="order-form">
+                    
+                        <div class="form-group">
+                            <label for="products">Продукты</label>
+                            <p>ЗДЕСЬ БУДЕТ СПИСОК ТОВАРОВ И ИХ ЦЕНА</p>
                         </div>
-                    </nav>
-                    <section class="filter">
-                        <div class="container">
-                            <div class="filter__wrap">
-                                {% for category in categories %}
-                                <a href="{% url 'filtered_products' category.id %}" class="filter__item">
-                                    <div class="filter__item-img" style="background-image: url(/media/{{category.image}});">
-                                    </div>
-                                    <h3 class="filter__item-text">{{category.name}}</h3>
-                                </a>
-                                {% endfor %}
-                            </div>
+                    
+                        <div class="form-group">
+                            <label for="payment_type">Способ оплаты</label>
+                            <select id="payment_type" name="payment_type">
+                                <option value="1">Наличными при получении</option>
+                                <option value="2">Картой</option>
+                            </select>
                         </div>
-                    </section>
-                    <section class="catalog">
-                        <div class="container">
-                            <div class="catalog__wrap">
-                                <div class="catalog__title-wrap">
-                                    <h1 class="catalog__title">Каталог товаров</h1>
-                                    <div class="catalog__sort">
-                                        <div class="catalog__sort-text">Сортировать по:</div>
-                                        <div class="catalog__sort-select">
-                                            <div class="catalog__sort-select-active">дате добавления</div>
-                                            <div class="catalog__sort-select-arrow">
-                                                <svg
-                                                    width="20.000000"
-                                                    height="20.000000"
-                                                    viewBox="0 0 20 20"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                >
-                                                    <defs />
-                                                    <path
-                                                        id="Primary fill"
-                                                        d="M10.0005 14C9.74414 14 9.48828 13.902 9.29346 13.707L4.29346 8.707C3.90234 8.31601 3.90234 7.68402 4.29346 7.293C4.68408 6.90201 5.31641 6.90201 5.70703 7.293L10.0005 11.586L14.2935 7.293C14.6841 6.90201 15.3164 6.90201 15.707 7.293C16.0981 7.68402 16.0981 8.31601 15.707 8.707L10.707 13.707C10.5122 13.902 10.2563 14 10.0005 14Z"
-                                                        fill="#8C9196"
-                                                        fill-opacity="1.000000"
-                                                        fill-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </div>
-                                            <ul class="catalog__sort-select-list">
-                                                <li class="catalog__sort-select-list-item" orderByData="-date_added">
-                                                    <p>
-                                                        дате добавления
-                                                    </p>
-                                                </li>
-                                                <li class="catalog__sort-select-list-item" orderByData="title">
-                                                    <p>
-                                                        названию: «от А до Я»
-                                                    </p>
-                                                </li>
-                                                <li class="catalog__sort-select-list-item" orderByData="-title">
-                                                    <p>
-                                                        названию: «от Я до А»
-                                                    </p>
-                                                </li>
-                                                <li class="catalog__sort-select-list-item" orderByData="price">
-                                                    <p>
-                                                        цене по возр.
-                                                    </p>
-                                                </li>
-                                                <li class="catalog__sort-select-list-item" orderByData="-price">
-                                                    <p>
-                                                        цене по убыв.
-                                                    </p>
-                                                </li>
-                                                <li class="catalog__sort-select-list-item" orderByData="-popularity">
-                                                    <p>
-                                                        популярности
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="catalog__filter-wrap">
-                                    <button class="catalog__filter">
-                                        <div class="catalog__filter-img">
-                                            <svg width="20.000000" height="20.000000" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <defs>
-                                                    <clipPath id="clip21_2362">
-                                                        <rect id="filter_major" width="20.000000" height="20.000000" fill="white" fill-opacity="0"/>
-                                                    </clipPath>
-                                                </defs>
-                                                <rect id="filter_major" width="20.000000" height="20.000000" fill="#FFFFFF" fill-opacity="0"/>
-                                                <g clip-path="url(#clip21_2362)">
-                                                    <path id="Primary fill" d="M0 5C0 4.44772 0.447754 4 1 4L19 4C19.5522 4 20 4.44772 20 5C20 5.55228 19.5522 6 19 6L1 6C0.447754 6 0 5.55228 0 5ZM3 10C3 9.44772 3.44775 9 4 9L16 9C16.5522 9 17 9.44772 17 10C17 10.5523 16.5522 11 16 11L4 11C3.44775 11 3 10.5523 3 10ZM7 15C7 14.4477 7.44775 14 8 14L12 14C12.5522 14 13 14.4477 13 15C13 15.5523 12.5522 16 12 16L8 16C7.44775 16 7 15.5523 7 15Z" fill="#5C5F62" fill-opacity="1.000000" fill-rule="evenodd"/>
-                                                </g>
-                                            </svg>
-                                        </div>
-                                        <div class="catalog__filter-text">
-                                            Фильтры
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
+                    
+                        <div class="form-group">
+                            <label for="delivery_type">Способ получения товара</label>
+                            <select id="delivery_type" name="delivery_type">
+                                <option value="1">Самовывоз</option>
+                                <option value="2">Доставка курьером</option>
+                            </select>
                         </div>
-                    </section>
-                    <section class="products">
-                        <div class="container">
-                            <div class="products__wrap">
-                                <aside class="catalog__filter-mob">
-                                    <div for="promotional" class="promotional__item">
-                                        <input type="checkbox" name="promotional" id="promotional" promotion="1" class="promotional__item-input-hide">
-                                        <label for="promotional" class="promotional__item-label">
-                                            <div>
-                                            </div>
-                                            <p>
-                                                Только акционные товары
-                                            </p>
-                                        </label>
-                                    </div>
-                                    <div class="filter__type">
-                                        <h3 class="filter__type-title">
-                                            Тип товара
-                                        </h3>
-                                        <ul class="filter__type-list">
-                                            {% for category in categories %}
-                                                {% url 'filtered_products' category.id as filtered_products %}
-                                                <li class="filter__type-list-item">
-                                                    <input onclick="window.location.href='{{filtered_products}}'" type="radio" id="fodder_{{forloop.counter}}" type-id="{{category.id}}" name="type" class="filter__type-list-item-hdie">
-                                                    <label for="fodder_{{forloop.counter}}" class="filter__type-list-item-label">
-                                                        <div>
-        
-                                                        </div>
-                                                        <p>
-                                                            {{category}}
-                                                        </p>
-                                                    </label>
-                                                </li>
-                                            {% endfor %}    
-                                        </ul>
-                                    </div>
-                                    <div class="filter__brand">
-                                        <h3 class="filter__brand-title">
-                                            Бренд
-                                        </h3>
-                                        <search class="brand__search">
-                                            <div class="brand__search-img">
-                                                <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="20"
-                                            height="20"
-                                            viewBox="0 0 20 20"
-                                            fill="none"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                clip-rule="evenodd"
-                                                d="M8 12C5.791 12 4 10.209 4 8C4 5.791 5.791 4 8 4C10.209 4 12 5.791 12 8C12 10.209 10.209 12 8 12ZM17.707 16.293L12.887 11.473C13.585 10.492 14 9.296 14 8C14 4.687 11.313 2 8 2C4.687 2 2 4.687 2 8C2 11.313 4.687 14 8 14C9.296 14 10.492 13.585 11.473 12.887L16.293 17.707C16.488 17.902 16.744 18 17 18C17.256 18 17.512 17.902 17.707 17.707C18.098 17.316 18.098 16.684 17.707 16.293Z"
-                                                fill="#5C5F62"
-                                            />
-                                        </svg>
-                                            </div>
-                                            <input type="text" name="brand" placeholder="Название бренда" />
-                                        </search>
-                                        <ul class="brand__list">
-                                            {% for brand in brands %}
-                                                <li class="brand__list-item">
-                                                    <input type="checkbox" id="brand_{{forloop.counter}}" name="type" brand-id="{{brand.id}}" class="brand__type-list-item-hdie">
-                                                    <label for="brand_{{forloop.counter}}" class="brand__list-item-label">
-                                                        <div>
-
-                                                        </div>
-                                                        <p>
-                                                            {{brand}}
-                                                        </p>
-                                                    </label>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                    <button type="button" class="filter__button">Применить фильтры</button>
-                                </aside>
-                                <div class="product__list-wrap">
-                                    <ul class="products__list"></ul>
-                                    <div class="products__pagination"></div>
-                                </div>
-                            </div>
+                    
+                        <div class="delivery-address">
+                            <p>ПРИКРУТИТЬ СЮДА ВЫБОР АДРЕСА, КОТОРЫЙ УЖЕ СОХРАНЕН У ПОЛЬЗОВАТЕЛЯ</p>
+                            <h3>Адрес доставки</h3>
+                            <div class="form-group">
+                                <label for="city">Город</label>
+                                <input type="text" id="city" name="city" placeholder="Введите город">
                         </div>
-                    </section>
-                    <section class="popular__goods slider__section">
-                        <div class="container">
-                            <div class="popular__goods-wrap slider__section-wrap">
-                                <div class="slider__wrap">
-                                    <div class="popular__goods-title-wrap slider__title-wrap">
-                                        <h2 class="popular__goods-title slider__title">Популярные товары</h2>
-                                        <div class="popular__goods-actions slider__actions">
-                                            <div class="popular__goods-arrow-prev slider__arrow">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="20"
-                                                    height="21"
-                                                    viewBox="0 0 20 21"
-                                                    fill="none"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        clip-rule="evenodd"
-                                                        d="M11.9998 16.1299C11.7438 16.1299 11.4878 16.0319 11.2928 15.8369L6.29276 10.8369C5.90176 10.4459 5.90176 9.81389 6.29276 9.42289L11.2928 4.42289C11.6838 4.03189 12.3158 4.03189 12.7068 4.42289C13.0978 4.81389 13.0978 5.44589 12.7068 5.83689L8.41376 10.1299L12.7068 14.4229C13.0978 14.8139 13.0978 15.4459 12.7068 15.8369C12.5118 16.0319 12.2558 16.1299 11.9998 16.1299Z"
-                                                        fill="#5C5F62"
-                                                    />
-                                                </svg>
-                                            </div>
-                                            <div class="popular__goods-arrow-next slider__arrow">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="20"
-                                                    height="21"
-                                                    viewBox="0 0 20 21"
-                                                    fill="none"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        clip-rule="evenodd"
-                                                        d="M7.99976 16.1299C7.74376 16.1299 7.48776 16.0319 7.29276 15.8369C6.90176 15.4459 6.90176 14.8139 7.29276 14.4229L11.5858 10.1299L7.29276 5.83689C6.90176 5.44589 6.90176 4.81389 7.29276 4.42289C7.68376 4.03189 8.31576 4.03189 8.70676 4.42289L13.7068 9.42289C14.0978 9.81389 14.0978 10.4459 13.7068 10.8369L8.70676 15.8369C8.51176 16.0319 8.25576 16.1299 7.99976 16.1299Z"
-                                                        fill="#5C5F62"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="popular__goods-slider slider">
-                                        {% for p in prods_by_popularity %}
-                                            <article class="slider__item">
-                                                <div class="slider__item-img">
-                                                    <img style="object-fit: contain;" src="/media/{{p.productimage_set.first.image}}" alt="item" />
-                                                </div>
-                                                {% if p.promotion_set.exists %}
-                                                    <div class="slider__item-promotion">
-                                                        Акция
-                                                    </div>
-                                                {% endif %}
-                                                <a href="{% url 'card_product' p.id %}" class="slider__item-title">
-                                                    {{p.title}}
-                                                </a>
-                                                <ul class="slider__item-weight-list">
-                                                    {% if p.productproperties_set.exists %}
-                                                        {% for property in p.productproperties_set.all %}
-                                                            <li class="slider__item-weight-list-item">{{property.weight}} {{p.unit}}</li>
-                                                        {% endfor %}
-                                                    {% else %}
-                                                        <li class="slider__item-weight-list-item">{{p.amount}} {{p.unit}}</li>
-                                                    {% endif %}
-                                                </ul>
-                                                <div class="slider__item-price-basket">
-                                                    {% if p.promotion_set.exists %}
-                                                        <p class="slider__item-price-promotion">{{p.price}} BYN</p>
-                                                        <p class="slider__item-price">{{p.promotion_set.first.discount}} BYN</p>
-                                                    {% else %}
-                                                        <p class="slider__item-price">{{p.price}} BYN</p>
-                                                    {% endif %}
-                                                    {% if request.user.is_authenticated %}
-                                                        <a href="{% url 'add_to_cart' p.id %}"><div class="slider__item-basket">
-                                                            <div class="slider__item-basket-text">+</div>
-                                                            <div class="slider__item-basket-img">
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="20"
-                                                                    height="20"
-                                                                    viewBox="0 0 20 20"
-                                                                    fill="none"
-                                                                >
-                                                                    <path
-                                                                        fill-rule="evenodd"
-                                                                        clip-rule="evenodd"
-                                                                        d="M1 1C1 0.447715 1.44932 0 2.00358 0H3.50894C4.34034 0 5.01431 0.671572 5.01431 1.5V2.06055L17.5883 2.96818C18.4651 3.02278 19.1089 3.81081 18.9846 4.67739L18.1194 10.7121C18.0135 11.4511 17.3783 12 16.6292 12H5.01431V14H15.0572C16.72 14 18.068 15.3431 18.068 17C18.068 18.6569 16.72 20 15.0572 20C13.3945 20 12.0465 18.6569 12.0465 17C12.0465 16.6494 12.1069 16.3128 12.2178 16H6.85015C6.9611 16.3128 7.02147 16.6494 7.02147 17C7.02147 18.6569 5.67352 20 4.01073 20C2.34795 20 1 18.6569 1 17C1 15.6938 1.83779 14.5825 3.00716 14.1707V3.00923C3.00711 3.00372 3.00711 2.99821 3.00716 2.99268V2H2.00358C1.44932 2 1 1.55228 1 1ZM5.01431 4.06445V10H16.194L16.9208 4.93051L5.01431 4.06445ZM14.0537 17C14.0537 16.4477 14.503 16 15.0572 16C15.6115 16 16.0608 16.4477 16.0608 17C16.0608 17.5523 15.6115 18 15.0572 18C14.503 18 14.0537 17.5523 14.0537 17ZM3.00716 17C3.00716 16.4477 3.45647 16 4.01073 16C4.56499 16 5.01431 16.4477 5.01431 17C5.01431 17.5523 4.56499 18 4.01073 18C3.45647 18 3.00716 17.5523 3.00716 17Z"
-                                                                        fill="#5C5F62"
-                                                                    />
-                                                                </svg>
-                                                            </div>
-                                                        </div></a>
-                                                    {% else %}
-                                                        <a href="{% url 'login' %}"><div class="slider__item-basket">
-                                                            <div class="slider__item-basket-text">+</div>
-                                                            <div class="slider__item-basket-img">
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="20"
-                                                                    height="20"
-                                                                    viewBox="0 0 20 20"
-                                                                    fill="none"
-                                                                >
-                                                                    <path
-                                                                        fill-rule="evenodd"
-                                                                        clip-rule="evenodd"
-                                                                        d="M1 1C1 0.447715 1.44932 0 2.00358 0H3.50894C4.34034 0 5.01431 0.671572 5.01431 1.5V2.06055L17.5883 2.96818C18.4651 3.02278 19.1089 3.81081 18.9846 4.67739L18.1194 10.7121C18.0135 11.4511 17.3783 12 16.6292 12H5.01431V14H15.0572C16.72 14 18.068 15.3431 18.068 17C18.068 18.6569 16.72 20 15.0572 20C13.3945 20 12.0465 18.6569 12.0465 17C12.0465 16.6494 12.1069 16.3128 12.2178 16H6.85015C6.9611 16.3128 7.02147 16.6494 7.02147 17C7.02147 18.6569 5.67352 20 4.01073 20C2.34795 20 1 18.6569 1 17C1 15.6938 1.83779 14.5825 3.00716 14.1707V3.00923C3.00711 3.00372 3.00711 2.99821 3.00716 2.99268V2H2.00358C1.44932 2 1 1.55228 1 1ZM5.01431 4.06445V10H16.194L16.9208 4.93051L5.01431 4.06445ZM14.0537 17C14.0537 16.4477 14.503 16 15.0572 16C15.6115 16 16.0608 16.4477 16.0608 17C16.0608 17.5523 15.6115 18 15.0572 18C14.503 18 14.0537 17.5523 14.0537 17ZM3.00716 17C3.00716 16.4477 3.45647 16 4.01073 16C4.56499 16 5.01431 16.4477 5.01431 17C5.01431 17.5523 4.56499 18 4.01073 18C3.45647 18 3.00716 17.5523 3.00716 17Z"
-                                                                        fill="#5C5F62"
-                                                                    />
-                                                                </svg>
-                                                            </div>
-                                                        </div></a>
-                                                    {% endif %}
-                                                </div>
-                                                <button type="button" class="slider__item-btn">Купить в 1 клик</button>
-                                            </article>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label for="street">Улица/Переулок</label>
+                            <input type="text" id="street" name="street" placeholder="Введите улицу или переулок">
                         </div>
-                    </section>
-                    <section class="articles">
-                        <div class="container">
-                            <div class="articles__wrap">
-                                <div class="articles__title-wrap">
-                                    <h2 class="articles__title">Полезные статьи</h2>
-                                    <div class="articles__action">
-                                        <div class="articles__arrow articles__arrow-prev">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="21"
-                                                viewBox="0 0 20 21"
-                                                fill="none"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M11.9998 16.77C11.7438 16.77 11.4878 16.672 11.2928 16.477L6.29276 11.477C5.90176 11.086 5.90176 10.454 6.29276 10.063L11.2928 5.06303C11.6838 4.67203 12.3158 4.67203 12.7068 5.06303C13.0978 5.45403 13.0978 6.08603 12.7068 6.47703L8.41376 10.77L12.7068 15.063C13.0978 15.454 13.0978 16.086 12.7068 16.477C12.5118 16.672 12.2558 16.77 11.9998 16.77Z"
-                                                    fill="#5C5F62"
-                                                />
-                                            </svg>
-                                        </div>
-                                        <div class="articles__arrow articles__arrow-next">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="20"
-                                                height="21"
-                                                viewBox="0 0 20 21"
-                                                fill="none"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    clip-rule="evenodd"
-                                                    d="M7.99976 16.77C7.74376 16.77 7.48776 16.672 7.29276 16.477C6.90176 16.086 6.90176 15.454 7.29276 15.063L11.5858 10.77L7.29276 6.47703C6.90176 6.08603 6.90176 5.45403 7.29276 5.06303C7.68376 4.67203 8.31576 4.67203 8.70676 5.06303L13.7068 10.063C14.0978 10.454 14.0978 11.086 13.7068 11.477L8.70676 16.477C8.51176 16.672 8.25576 16.77 7.99976 16.77Z"
-                                                    fill="#5C5F62"
-                                                />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="articles__slider">
-                                    {% for a in articles %}
-                                        <article class="articles__slider-item">
-                                        <div class="articles__slider-item-img">
-                                            <img src="/media/{{a.image}}" alt="articlesImg" />
-                                        </div>
-                                        <div class="articles__slider-item-text-wrap">
-                                            <a href="{% url 'full_article' a.id %}">
-                                                <h3 class="articles__slider-item-title">
-                                                    {{a.title}}
-                                                </h3>
-                                            </a>
-                                            <p class="articles__slider-item-text">
-                                                {{a.article_text|slice:"70"}}..
-                                            </p>
-                                        </div>
-                                        <div class="articles__slider-item-time-wrap">
-                                            <div class="articles__slider-item-time">
-                                                <div class="articles__slider-item-time-img">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="17"
-                                                        viewBox="0 0 16 17"
-                                                        fill="none"
-                                                    >
-                                                        <path
-                                                            fill-rule="evenodd"
-                                                            clip-rule="evenodd"
-                                                            d="M8.0001 15.17C4.4713 15.17 1.6001 12.2988 1.6001 8.77002C1.6001 5.24122 4.4713 2.37002 8.0001 2.37002C11.5289 2.37002 14.4001 5.24122 14.4001 8.77002C14.4001 12.2988 11.5289 15.17 8.0001 15.17ZM9.8345 11.4044C9.6297 11.4044 9.4249 11.326 9.2689 11.17L7.4345 9.33562C7.2841 9.18602 7.2001 8.98202 7.2001 8.77002V5.57002C7.2001 5.12842 7.5577 4.77002 8.0001 4.77002C8.4425 4.77002 8.8001 5.12842 8.8001 5.57002V8.43882L10.4001 10.0388C10.7129 10.3516 10.7129 10.8572 10.4001 11.17C10.2441 11.326 10.0393 11.4044 9.8345 11.4044Z"
-                                                            fill="#8C9196"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <p>Время чтения: {{a.reading_time}} мин.</p>
-                                            </div>
-                                            <div class="articles__slider-item-date">
-                                                <div class="articles__slider-item-time-date">
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="16"
-                                                        height="17"
-                                                        viewBox="0 0 16 17"
-                                                        fill="none"
-                                                    >
-                                                        <path
-                                                            fill-rule="evenodd"
-                                                            clip-rule="evenodd"
-                                                            d="M13.2001 3.97002C13.8628 3.97002 14.4001 4.50728 14.4001 5.17002V13.97C14.4001 14.6328 13.8628 15.17 13.2001 15.17H2.8001C2.13736 15.17 1.6001 14.6328 1.6001 13.97V5.17002C1.6001 4.50728 2.13736 3.97002 2.8001 3.97002H4.0001V3.17002C4.0001 2.72842 4.3577 2.37002 4.8001 2.37002C5.2425 2.37002 5.6001 2.72842 5.6001 3.17002V3.97002H10.4001V3.17002C10.4001 2.72842 10.7577 2.37002 11.2001 2.37002C11.6425 2.37002 12.0001 2.72842 12.0001 3.17002V3.97002H13.2001ZM12.8001 7.17002H3.2001V13.57H12.8001V7.17002Z"
-                                                            fill="#8C9196"
-                                                        />
-                                                    </svg>
-                                                </div>
-                                                <p>{{a.date_published|date:"d F Y"}}</p>
-                                            </div>
-                                        </div>
-                                        </article>
-                                    {% endfor %}
-                                </div>
-                                <button onclick="window.location.href='{% url 'articles' %}';" type="button" class="articles__button button">Читать больше статей</button>
-                            </div>
+                        <div class="form-group">
+                            <label for="house_num">Номер дома</label>
+                            <input type="text" id="house_num" name="house_num" placeholder="Введите номер дома">
                         </div>
-                    </section>
+                        <div class="form-group">
+                            <label for="entrance_num">Номер подъезда</label>
+                            <input type="text" id="entrance_num" name="entrance_num" placeholder="Введите номер подъезда">
+                        </div>
+                        <div class="form-group">
+                            <label for="apartment_num">Номер квартиры</label>
+                            <input type="text" id="apartment_num" name="apartment_num" placeholder="Введите номер квартиры">
+                        </div>
+                        <div class="form-group">
+                            <label for="postal_code">Почтовый индекс</label>
+                            <input type="text" id="postal_code" name="postal_code" placeholder="Введите почтовый индекс">
+                        </div>
+                        </div>
+                    
+                        <button type="submit">Отправить заказ</button>
+                    </div>
                 </div>
             </main>
             <footer>
                 <div class="container">
                     <div class="footer__wrap">
                         <div class="footer__up">
-                            <a href="/"><div class="footer__logo">
+                            <a href="/">
+                                <div class="footer__logo">
                                 <div class="footer__logo-img">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -842,7 +553,8 @@
                                     </svg>
                                 </div>
                                 <h2 class="footer__logo-text">Территория <span>ZOO</span></h2>
-                            </div></a>
+                                </div>
+                            </a>
                             <nav class="footer__nav">
                                 <ul class="footer__list">
                                     <li class="footer__list-item">
@@ -953,24 +665,16 @@
                             </div>
                         </div>
                         <div class="footer__design">
-                            <div class="footer__design-about">Дизайн сайта: <a href="https://shkuratovdesigner.com/"><span>shkuratovdesigner.com</span></a></div>
-                            <div class="footer__rights">© Все права защищены 2022</div>
+                            <div class="footer__design-about">
+                                Дизайн сайта: <span><a href="https://shkuratovdesigner.com/">shkuratovdesigner.com</a></span>
+                            </div>
+                            <div class="footer__rights">
+                                © Все права защищены 2022
+                            </div>
                         </div>
                     </div>
                 </div>
             </footer>
         </div>
-        <script src="{% static '/catalogZoo/js/burger.js' %}"></script>
-        <script src="{% static '/catalogZoo/js/select.js' %}"></script>
-        <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script defer src="{% static '/catalogZoo/js/slick.min.js' %}"></script>
-        <script defer src="{% static '/catalogZoo/js/slider.js' %}"></script>
-        <script defer src="{% static 'filterProducts.js' %}"></script>
-        <script defer src="{% static 'asideFilterForBrands.js' %}"></script>
-        <script src="{% static '/Zoo/js/chooseWeight.js' %}"></script>
-        <script src="{% static 'renderProductsList.js' %}"></script>
-        <script src="{% static 'fetchAllProducts.js' %}"></script>
-        <script src="{% static 'searchStorage.js' %}"></script>
-        <!-- <script defer src="{% static '/catalogZoo/js/addToBasket.js' %}"></script> -->
     </body>
 </html>

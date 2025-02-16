@@ -255,7 +255,7 @@
                                     </div>
                                     <h2 class="header__logo-text">Территория <span>ZOO</span></h2>
                                 </div></a>
-                                <form class="header__bottom-search" action="{% url 'api_search' %}">
+                                <form class="header__bottom-search" action="{% url 'search_results' %}">
                                     <button style="background-color: white;" class="header__bottom-search-img">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -541,8 +541,8 @@
                                     <button type="button" class="filter__button">Применить фильтры</button>
                                 </aside>
                                 <div class="product__list-wrap">
-                                    <ul class="products__list">
-                                    </ul>
+                                    <ul class="products__list"></ul>
+                                    <div class="products__pagination"></div>
                                 </div>
                             </div>
                         </div>
@@ -909,9 +909,10 @@
         <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script defer src="{% static '/catalogZoo/js/slick.min.js' %}"></script>
         <script defer src="{% static '/catalogZoo/js/slider.js' %}"></script>
-        <script src="{% static 'searchStorage.js' %}"></script>
-        <script src="{% static 'search_page/js/fetchApiSearch.js' %}"></script>
-        <script src="{% static 'search_page/js/renderProductsSearch.js' %}"></script>
-        <!-- <script defer src="{% static '/catalogZoo/js/aside_filter_for_brands.js' %}"></script> -->
+        <script src="{% static '/asideFilterForBrands.js' %}"></script>
+        <script src="{% static '/renderProductsList.js' %}"></script>
+        <script src="{% static '/filterProducts.js' %}"></script>
+        <script src="{% static '/search_page/js/fetchApiSearch.js' %}"></script>
+        <script src="{% static '/searchStorage.js' %}"></script>
     </body>
 </html>

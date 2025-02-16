@@ -5,6 +5,6 @@ const searchButton = document.querySelector('.header__bottom-search-img')
 function addQueryDataToLocalStorage() {
 
     const searchData = document.getElementById('id_query').value
-    localStorage.setItem('query', searchData)
+    localStorage.setItem('title', searchData)
 
 }

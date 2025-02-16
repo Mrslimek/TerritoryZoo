@@ -1,13 +1,10 @@
 #Django
-from django.shortcuts import render
 #Rest framework
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 #Project
 from .serializers import *
 from .pagination import CustomPagination
-from catalog.forms import SearchForm
-import json
 
 # Create your views here.
 
@@ -20,70 +17,57 @@ def get_products_paginated(request):
     page_obj = paginator.paginate_queryset(products, request)
 
     serializer = FilterProductSerializer(page_obj, many=True)
-    return paginator.get_paginated_response(serializer.data)
+    response_data = {
+        'results': serializer.data, 
+        'user_authenticated': request.user.is_authenticated,
+    }
+
+    return paginator.get_paginated_response(response_data)
 
 
 @api_view(['GET', 'POST'])
 def get_products_filtered(request):
 
+    print(request.data)
+
     filters = {}
-    fields = ['product_category', 'product_type', 'brand']
+    response_data = {}
+    fields = ['title__icontains', 'product_category', 'product_type_id', 'brand_id__in']
 
     for field in fields:
         value = request.data.get(field)
         if value:
-            if field == 'product_type':
-                filters['product_type_id'] = value
-            elif field == 'brand':
-                filters['brand_id__in'] = value
-            else:
-                filters[field] = value
+                filters[field] = value 
     
     if 'promotion' in request.data:
         products = Product.objects.filter(**filters).filter(promotion__isnull=False)
+        if not products:
+             response_data['message'] = 'По вашему запросу ничего не найдено'
+             return Response(response_data)
     else:
         products = Product.objects.filter(**filters)
+        if not products:
+            response_data['message'] = 'По вашему запросу ничего не найдено'  
+            return Response(response_data)
+    
+    if 'is_search' in request.data:
+        brands = {item.brand for item in products}
+        brand_serializer = BrandSerializer(brands, many=True)
+        response_data['brands'] = brand_serializer.data
     
     if 'order_by' in request.data:
-        products = products.order_by(request.data['order_by'])
+        allowed_order_fields = ['-price', 'price', '-popularity', '-title', 'title', '-date_added']
+        if request.data['order_by'] in allowed_order_fields:
+            products = products.order_by(request.data['order_by'])
 
     paginator = CustomPagination()
     page_obj = paginator.paginate_queryset(products, request)
 
     serializer = FilterProductSerializer(page_obj, many=True)
+         
+    response_data.update({
+        'results': serializer.data, 
+        'user_authenticated': request.user.is_authenticated,
+    })
 
-    return paginator.get_paginated_response(serializer.data)
-
-
-@api_view(['POST'])
-def search_products(request):
-
-    if request.method == 'POST':
-
-        query = request.data
-
-        if query:
-
-            search_results = Product.objects.filter(title__icontains=query)
-
-            if search_results:
-
-                brands = {item.brand for item in search_results}
-                brand_serializer = BrandSerializer(brands, many=True)
-
-                paginator = CustomPagination()
-                page_obj = paginator.paginate_queryset(search_results, request)
-                product_serializer = FilterProductSerializer(page_obj, many=True)
-
-                response_data = {
-                    'brands': brand_serializer.data,
-                    'results': product_serializer.data
-                }
-                return paginator.get_paginated_response(response_data)
-            
-            else:
-
-                message = 'По вашему запросу ничего не найдено'
-                return Response(message)
-            
-        return Response('Данные некорректны')
+    return paginator.get_paginated_response(response_data)

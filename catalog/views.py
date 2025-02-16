@@ -37,44 +37,34 @@ def home(request):
 
 def catalog_filter_by_id(request, product_category_id):
 
+    context = {}
     search_form = SearchForm()
-    
+
     categories = ProductCategory.objects.all()
     current_category = categories.get(id=product_category_id)
-    products = Product.objects.filter(product_category=product_category_id)
-    paginator = Paginator(products, 15)
-    products_by_popularity = products.order_by('-popularity')
+    products_by_popularity = Product.objects.all().order_by('-popularity')
     choices = ProductType.objects.all()
     brands = Brand.objects.filter(product_category=product_category_id)
     articles = Article.objects.all()
-    user = request.user
-    cart_items_count = 0
 
-    if user.is_authenticated:
+    if request.user.is_authenticated:
         cart_items_count = CartItem.objects.filter(user=request.user).count()
+        context['cart_items_count'] = cart_items_count
 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-
-    
     def get_category_name():
         category = categories.get(id=product_category_id)
         return category.name
 
-    context = {
+    context.update({
         'search_form': search_form,
         'category_name': get_category_name,
         'current_category': current_category,
-        'products': products,
         'choices': choices,
         'brands': brands,
         'categories': categories,
         'products_by_popularity': products_by_popularity,
-        'page_obj': page_obj,
-        'cart_items_count': cart_items_count,
         'articles': articles
-    }
+    })
 
     return render(request, 'catalogZooFilteredByCategory.html', context)
 
