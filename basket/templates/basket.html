@@ -414,7 +414,7 @@
                                                         <div class="basket__list-item-title">
                                                             {{p.product.title}}
                                                         </div>
-                                                        <ul class="basket__list-item-weight-list">
+                                                        <!-- <ul class="basket__list-item-weight-list">
                                                             {% if p.product.productproperties_set.exists %}
                                                                 {% for prop in p.product.productproperties_set.all %}
                                                                     <li class="basket__list-item-weight-list-item">
@@ -422,7 +422,7 @@
                                                                     </li>
                                                                 {% endfor %}
                                                             {% endif %}
-                                                        </ul>
+                                                        </ul> -->
                                                         <div class="basket__list-item-weight-wrap">
                                                             {% if p.productproperties_set.exists %}
                                                                 <p class="basket__list-item-weight-text">Указать свой вес</p>
@@ -431,6 +431,9 @@
                                                                     <button type="button">Применить</button>
                                                                 </div>
                                                             {% endif %}
+                                                        </div>
+                                                        <div class="basket__list-item-price">
+                                                            {{p.cart_item_price}}BYN
                                                         </div>
                                                     </div>
                                                     <div class="basket__list-action-wrap">
@@ -506,7 +509,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button">
+                                            <button type="button" onclick="window.location.href='{% url 'make_order_items' %}'">
                                                 Оформить заказ
                                             </button>
                                         </div>

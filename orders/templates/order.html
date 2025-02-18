@@ -462,57 +462,46 @@
             <main>
                 <div class="container">
                     <div class="order-form">
-                    
                         <div class="form-group">
                             <label for="products">Продукты</label>
-                            <p>ЗДЕСЬ БУДЕТ СПИСОК ТОВАРОВ И ИХ ЦЕНА</p>
+                            <ul>
+                                {% for item in order_item_list %}
+                                    <li>{{item.product}} - {{item.quantity}}шт. - {{item.price}}BYN</li>
+                                {% endfor %}
+                            </ul>
+                            <p><strong>Итого:</strong> {{order.order_sum}}BYN</p>
+                        </div>
+                        <div class="form-group">
+                            {{order_form.payment_type.label}}: {{order_form.payment_type}}
                         </div>
                     
                         <div class="form-group">
-                            <label for="payment_type">Способ оплаты</label>
-                            <select id="payment_type" name="payment_type">
-                                <option value="1">Наличными при получении</option>
-                                <option value="2">Картой</option>
-                            </select>
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="delivery_type">Способ получения товара</label>
-                            <select id="delivery_type" name="delivery_type">
-                                <option value="1">Самовывоз</option>
-                                <option value="2">Доставка курьером</option>
-                            </select>
+                            {{order_form.delivery_type.label}}: {{order_form.delivery_type}}
                         </div>
                     
                         <div class="delivery-address">
                             <p>ПРИКРУТИТЬ СЮДА ВЫБОР АДРЕСА, КОТОРЫЙ УЖЕ СОХРАНЕН У ПОЛЬЗОВАТЕЛЯ</p>
                             <h3>Адрес доставки</h3>
                             <div class="form-group">
-                                <label for="city">Город</label>
-                                <input type="text" id="city" name="city" placeholder="Введите город">
+                                {{order_form.city.label}}: {{order_form.city}}
+                            </div>
+                            <div class="form-group">
+                                {{order_form.street.label}}: {{order_form.street}}
+                            </div>
+                            <div class="form-group">
+                                {{order_form.house_num.label}}: {{order_form.house_num}}
+                            </div>
+                            <div class="form-group">
+                                {{order_form.entrance_num.label}}: {{order_form.entrance_num}}
+                            </div>
+                            <div class="form-group">
+                                {{order_form.apartment_num.label}}: {{order_form.apartment_num}}
+                            </div>
+                            <div class="form-group">
+                                {{order_form.postal_code.label}}: {{order_form.postal_code}}
+                            </div>
+                            
                         </div>
-                        <div class="form-group">
-                            <label for="street">Улица/Переулок</label>
-                            <input type="text" id="street" name="street" placeholder="Введите улицу или переулок">
-                        </div>
-                        <div class="form-group">
-                            <label for="house_num">Номер дома</label>
-                            <input type="text" id="house_num" name="house_num" placeholder="Введите номер дома">
-                        </div>
-                        <div class="form-group">
-                            <label for="entrance_num">Номер подъезда</label>
-                            <input type="text" id="entrance_num" name="entrance_num" placeholder="Введите номер подъезда">
-                        </div>
-                        <div class="form-group">
-                            <label for="apartment_num">Номер квартиры</label>
-                            <input type="text" id="apartment_num" name="apartment_num" placeholder="Введите номер квартиры">
-                        </div>
-                        <div class="form-group">
-                            <label for="postal_code">Почтовый индекс</label>
-                            <input type="text" id="postal_code" name="postal_code" placeholder="Введите почтовый индекс">
-                        </div>
-                        </div>
-                    
                         <button type="submit">Отправить заказ</button>
                     </div>
                 </div>

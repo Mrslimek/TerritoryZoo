@@ -1,67 +1,59 @@
 #Django
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 #Project
 from .forms import *
 from .models import *
 from catalog.forms import SearchForm
 
+
 @login_required
 def profile(request):
-
+    context = {}
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
-    user_profile_address = ['Пока что нет адресов']
+    user_profile_address = UserProfileAddress.objects.filter(profile=user_profile) or ['Пока что нет адресов']
 
-    if UserProfileAddress.objects.filter(profile=user_profile):
-        user_profile_address = UserProfileAddress.objects.filter(profile=user_profile)
-    
     user_change_form = CustomUserChangeForm()
     user_profile_change_form = UserProfileChangeForm()
     user_profile_address_form = UserProfileAddressForm()
 
     if request.method == 'POST':
         if 'user_change' in request.POST:
-            form_data = CustomUserChangeForm(request.POST)
-            if form_data.is_valid():
-                form_data.save(instance=user)
-                return render(request,'profile.html',context = {
-                                                    'user_change_form': user_change_form,
-                                                    'user_profile_change_form': user_profile_change_form,
-                                                    'message_user': 'Данные успешно сохранены'
-                                                })      
+            user_change_form = CustomUserChangeForm(request.POST)
+            if user_change_form.is_valid():
+                user_change_form.save(instance=user)
+                return redirect('profile')
+            else:
+                context['password_message'] = user_change_form.errors
 
-        if 'profile_change' in request.POST:
-            form_data = UserProfileChangeForm(request.POST)
-            if form_data.is_valid():
-                if form_data.cleaned_data['phone_number']:
-                    user_profile.phone_number = form_data.cleaned_data['phone_number']
-                if form_data.cleaned_data['date_of_birth']:
-                    user_profile.date_of_birth = form_data.cleaned_data['date_of_birth']
-                user_profile.save()
-                return render(request, 'profile.html', context = {
-                                                                 'user_change_form': user_change_form,
-                                                                 'user_profile_change_form': user_profile_change_form,
-                                                                 'message_profile': 'Данные успешно сохранены'
-                                                             }) 
+        elif 'profile_change' in request.POST:
+            user_profile_change_form = UserProfileChangeForm(request.POST, instance=user_profile)
+            if user_profile_change_form.is_valid():
+                user_profile_change_form.save()
+                return redirect('profile')
 
-        if 'user_profile_address_add' in request.POST:
-            user_address = UserProfileAddressForm(request.POST)
-            if user_address.is_valid():
-                user_address.save(instance=user_profile)
+        elif 'user_profile_address_add' in request.POST:
+            user_profile_address_form = UserProfileAddressForm(request.POST)
+            if user_profile_address_form.is_valid():
+                address = user_profile_address_form.save(instance=user_profile)
+                address.profile = user_profile
+                address.save()
+                return redirect('profile')
 
-    context = {
+    context.update({
         'user_change_form': user_change_form,
         'user_profile_change_form': user_profile_change_form,
         'user_profile_address_form': user_profile_address_form,
         'user_profile_address': user_profile_address,
         'profile': user_profile,
-        'user': user
-    }
+        'user': user,
+    })
 
     return render(request, 'profile.html', context)
+
 
 def register_user(request):
 
@@ -71,8 +63,9 @@ def register_user(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('http://127.0.0.1:8000/login/')
+            user = form.save()
+            user_profile = UserProfile.objects.create(user = user)
+            return redirect('login')
         if form.errors:
             form = form
 

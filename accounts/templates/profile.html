@@ -495,8 +495,8 @@
                                         {{ user_change_form.password2 }}
                                     </div>
                                 </div>
-                                {% if message_user %}
-                                    <p class="user-controls__message"><strong>{{ message_user }}</strong></p>
+                                {% if password_message %}
+                                    <p class="user-controls__message"><strong>{{ password_message }}</strong></p>
                                 {% endif %}
                                 <button class="button" name="user_change">Сохранить</button>
                             </form>

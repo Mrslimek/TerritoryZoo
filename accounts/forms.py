@@ -8,7 +8,6 @@ from .utils import *
 from .models import *
 
 
-# В классах SetPasswordMixin и EmailValidator ошибки были переведены на русский
 class RegisterForm(UserCreationForm):
 
     password1 = forms.CharField(
@@ -53,24 +52,15 @@ class RegisterForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(
-        label='Логин',
-        widget=forms.TextInput(attrs={
+    username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={
             'placeholder': 'Введите ваше имя',
             'class': 'login-form-field'
-            }
-        ),
-        validators=[username_validator]
-)
+            }),validators=[username_validator])
 
-    password = forms.CharField(
-        label='Пароль',
-        widget=forms.PasswordInput(attrs={
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={
                 'placeholder': 'Введите пароль',
                 'class': 'login-form-field'
-            }
-        ),
-    )
+            }))
 
     def clean(self):
         cleaned_data = super().clean()
@@ -79,8 +69,8 @@ class LoginForm(forms.Form):
         if username and password:
             user = authenticate(username=username, password=password)
             if user is None:
-                raise forms.ValidationError(('Логин или пароль не существует'), code='invalid_login' )
-                return cleaned_data
+                raise forms.ValidationError(('Логин или пароль не существует'), code='invalid_login')
+            return cleaned_data
 
 
 class ResetForm(forms.Form):
@@ -153,27 +143,27 @@ class UserProfileChangeForm(forms.ModelForm):
 class UserProfileAddressForm(forms.Form):
     city = forms.CharField(label='Город', widget=forms.TextInput(attrs={
         'class': 'input_field',
-        'placeholder': 'Минск'
+        'placeholder': 'г. Минск'
     }))
     street = forms.CharField(label='Улица/Переулок', widget=forms.TextInput(attrs={
         'class': 'input_field',
-        'placeholder': 'Пушкина'
+        'placeholder': 'Ул. Пушкина'
     }))
     house_num = forms.CharField(label='Номер дома', widget=forms.TextInput(attrs={
         'class': 'input_field',
-        'placeholder': '47'
+        'placeholder': 'Д. 12'
     }))
     entrance_num = forms.CharField(label='Номер подъезда', widget=forms.TextInput(attrs={
         'class': 'input_field',
-        'placeholder': '7'
+        'placeholder': 'Под. 2'
     }))
     apartment_num = forms.CharField(label='Номер квартиры', widget=forms.TextInput(attrs={
         'class': 'input_field',
-        'placeholder': '6'
+        'placeholder': 'Кв. 35'
     }))
     postal_code = forms.CharField(label='Почтовый индекс', widget=forms.TextInput(attrs={
         'class': 'input_field',
-        'placeholder': '123456'
+        'placeholder': '220030'
     }))
 
 

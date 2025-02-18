@@ -127,17 +127,17 @@ class Promotion(models.Model):
     start_date = models.DateTimeField(verbose_name='Дата начала акции')
     end_date = models.DateTimeField(verbose_name='Дата окончания акции')
 
+    class Meta:
+        verbose_name = 'Акционный товар'
+        verbose_name_plural = 'Акционные товары'
 
     def is_active(self):
         from django.utils import timezone
         return self.start_date <= timezone.now() <= self.end_date
 
+
     def __str__(self):
         return f'{self.product} --- {self.discount}'
-    
-    class Meta:
-        verbose_name = 'Акционный товар'
-        verbose_name_plural = 'Акционные товары'
     
 
 class Article(models.Model):

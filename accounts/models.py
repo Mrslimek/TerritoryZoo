@@ -23,4 +23,4 @@ class UserProfileAddress(models.Model):
 
 
     def __str__(self):
-        return f'г. {self.city}, {self.street}, д.{self.house_num}, под. {self.entrance_num}, кв. {self.apartment_num}, {self.postal_code}'
+        return f'{self.city}, {self.street}, {self.house_num}, {self.entrance_num}, {self.apartment_num}, {self.postal_code}'

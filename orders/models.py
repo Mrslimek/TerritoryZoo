@@ -7,13 +7,14 @@ from catalog.models import Product
 class Order(models.Model):
 
     ORDER_STATUS_CHOICES = (
-        (1, 'Оформлен'),
-        (2, 'Ожидает оплату'),
-        (3, 'Оплачен'),
-        (4, 'Подтвержден'),
-        (5, 'Выполнен'),
-        (6, 'Аннулирован'),
-        (7, 'Ошибка оплаты'),
+        (1, 'Создан'),
+        (2, 'Оформлен'),
+        (3, 'Ожидает оплату'),
+        (4, 'Оплачен'),
+        (5, 'Подтвержден'),
+        (6, 'Выполнен'),
+        (7, 'Аннулирован'),
+        (8, 'Ошибка оплаты'),
     )
 
     DELIVERY_TYPE_CHOICES = (
@@ -26,18 +27,36 @@ class Order(models.Model):
         (2, 'Картой'),
     )
 
-    products = models.ManyToManyField(Product, verbose_name='Продукты')
-    order_num = models.CharField(verbose_name='Номер заказа')
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Пользователь')
-    receipt = models.FileField(upload_to='receipts', verbose_name='Чек')
-    order_sum = models.DecimalField(max_digits=15, decimal_places=2, verbose_name='Сумма заказа')
-    payment_type = models.PositiveSmallIntegerField(choices=PAYMENT_TYPE_CHOICES, verbose_name='Способ оплаты')
+    order_num = models.CharField(verbose_name='Номер заказа')
+    order_sum = models.DecimalField(null=True, max_digits=15, decimal_places=2, verbose_name='Сумма заказа')
+    payment_type = models.PositiveSmallIntegerField(null=True, choices=PAYMENT_TYPE_CHOICES, verbose_name='Способ оплаты')
+    delivery_type = models.PositiveSmallIntegerField(null=True, choices=DELIVERY_TYPE_CHOICES, verbose_name='Способ получения товара')
     status = models.PositiveSmallIntegerField(choices=ORDER_STATUS_CHOICES, verbose_name='Статус заказа')
-    show_order_to_user = models.BooleanField(verbose_name='Показывать заказ пользователю')
-    delivery_type = models.PositiveSmallIntegerField(choices=DELIVERY_TYPE_CHOICES, verbose_name='Способ получения товара')
-    city = models.CharField(verbose_name='Город', blank=True, null=True)
-    street = models.CharField(verbose_name='Улица/Переулок', blank=True, null=True)
-    house_num = models.CharField(verbose_name='Номер дома', blank=True, null=True)
-    entrance_num = models.CharField(verbose_name='Номер подъезда', blank=True, null=True)
-    apartment_num = models.CharField(verbose_name='Номер квартиры', blank=True, null=True)
-    postal_code = models.CharField(verbose_name='Почтовый индекс', blank=True, null=True)
+    city = models.CharField(blank=True, null=True, verbose_name='Город')
+    street = models.CharField(blank=True, null=True, verbose_name='Улица/Переулок')
+    house_num = models.CharField(blank=True, null=True, verbose_name='Номер дома')
+    entrance_num = models.CharField(blank=True, null=True, verbose_name='Номер подъезда')
+    apartment_num = models.CharField(blank=True, null=True, verbose_name='Номер квартиры')
+    postal_code = models.CharField(blank=True, null=True, verbose_name='Почтовый индекс')
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name = 'Заказы'
+
+    def __str__(self):
+        return self.order_num
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Номер заказа')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Название продукта')
+    quantity = models.PositiveIntegerField(default=1, verbose_name='Кол-во продукта')
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена продукта')
+
+    class Meta:
+        verbose_name = 'Продукт в заказе'
+        verbose_name_plural = 'Продукты в заказе'
+
+    def __str__(self):
+        return self.quantity
