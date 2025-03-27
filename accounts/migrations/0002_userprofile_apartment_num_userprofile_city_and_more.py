@@ -6,38 +6,46 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0001_initial'),
+        ("accounts", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='userprofile',
-            name='apartment_num',
-            field=models.CharField(blank=True, null=True, verbose_name='Номер квартиры'),
+            model_name="userprofile",
+            name="apartment_num",
+            field=models.CharField(
+                blank=True, null=True, verbose_name="Номер квартиры"
+            ),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='city',
-            field=models.CharField(blank=True, null=True, verbose_name='Город'),
+            model_name="userprofile",
+            name="city",
+            field=models.CharField(blank=True, null=True, verbose_name="Город"),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='entrance_num',
-            field=models.CharField(blank=True, null=True, verbose_name='Номер подъезда'),
+            model_name="userprofile",
+            name="entrance_num",
+            field=models.CharField(
+                blank=True, null=True, verbose_name="Номер подъезда"
+            ),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='house_num',
-            field=models.CharField(blank=True, null=True, verbose_name='Номер дома'),
+            model_name="userprofile",
+            name="house_num",
+            field=models.CharField(blank=True, null=True, verbose_name="Номер дома"),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='postal_code',
-            field=models.CharField(blank=True, null=True, verbose_name='Почтовый индекс'),
+            model_name="userprofile",
+            name="postal_code",
+            field=models.CharField(
+                blank=True, null=True, verbose_name="Почтовый индекс"
+            ),
         ),
         migrations.AddField(
-            model_name='userprofile',
-            name='street',
-            field=models.CharField(blank=True, null=True, verbose_name='Улица/Переулок'),
+            model_name="userprofile",
+            name="street",
+            field=models.CharField(
+                blank=True, null=True, verbose_name="Улица/Переулок"
+            ),
         ),
     ]

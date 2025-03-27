@@ -1,5 +1,6 @@
 from .models import CartItem
 
+
 def calculate_final_price(user):
     products = CartItem.objects.filter(user=user)
 

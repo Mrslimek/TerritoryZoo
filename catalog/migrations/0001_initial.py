@@ -8,127 +8,322 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Brand',
+            name="Brand",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True, verbose_name='Название продукта')),
-                ('image', models.FileField(upload_to='', verbose_name='Картинка бренда')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=255, unique=True, verbose_name="Название продукта"
+                    ),
+                ),
+                (
+                    "image",
+                    models.FileField(upload_to="", verbose_name="Картинка бренда"),
+                ),
             ],
             options={
-                'verbose_name': 'Брэнд',
-                'verbose_name_plural': 'Брэнды',
+                "verbose_name": "Брэнд",
+                "verbose_name_plural": "Брэнды",
             },
         ),
         migrations.CreateModel(
-            name='ProductCategory',
+            name="ProductCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True, verbose_name='Категория продукта')),
-                ('image', models.FileField(upload_to='', verbose_name='Картинка категории')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=255, unique=True, verbose_name="Категория продукта"
+                    ),
+                ),
+                (
+                    "image",
+                    models.FileField(upload_to="", verbose_name="Картинка категории"),
+                ),
             ],
             options={
-                'verbose_name': 'Категория товара',
-                'verbose_name_plural': 'Категория товаров',
+                "verbose_name": "Категория товара",
+                "verbose_name_plural": "Категория товаров",
             },
         ),
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255, unique=True, verbose_name='Название')),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Цена')),
-                ('amount', models.IntegerField(verbose_name='Кол-во продукта')),
-                ('unit', models.CharField(choices=[('кг', 'кг'), ('л', 'л'), ('г', 'г'), ('шт', 'шт')], max_length=255, verbose_name='Единица измерения')),
-                ('date_added', models.DateTimeField(null=True, verbose_name='Дата добавления продукта')),
-                ('popularity', models.IntegerField(default=0, verbose_name='Популярность продукта')),
-                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.brand', verbose_name='Бренд')),
-                ('product_category', models.ManyToManyField(to='catalog.productcategory', verbose_name='Категория продукта')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(
+                        max_length=255, unique=True, verbose_name="Название"
+                    ),
+                ),
+                (
+                    "price",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=10, verbose_name="Цена"
+                    ),
+                ),
+                ("amount", models.IntegerField(verbose_name="Кол-во продукта")),
+                (
+                    "unit",
+                    models.CharField(
+                        choices=[("кг", "кг"), ("л", "л"), ("г", "г"), ("шт", "шт")],
+                        max_length=255,
+                        verbose_name="Единица измерения",
+                    ),
+                ),
+                (
+                    "date_added",
+                    models.DateTimeField(
+                        null=True, verbose_name="Дата добавления продукта"
+                    ),
+                ),
+                (
+                    "popularity",
+                    models.IntegerField(
+                        default=0, verbose_name="Популярность продукта"
+                    ),
+                ),
+                (
+                    "brand",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.brand",
+                        verbose_name="Бренд",
+                    ),
+                ),
+                (
+                    "product_category",
+                    models.ManyToManyField(
+                        to="catalog.productcategory", verbose_name="Категория продукта"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Продукт',
-                'verbose_name_plural': 'Продукты',
+                "verbose_name": "Продукт",
+                "verbose_name_plural": "Продукты",
             },
         ),
         migrations.AddField(
-            model_name='brand',
-            name='product_category',
-            field=models.ManyToManyField(to='catalog.productcategory', verbose_name='Категория продукта'),
+            model_name="brand",
+            name="product_category",
+            field=models.ManyToManyField(
+                to="catalog.productcategory", verbose_name="Категория продукта"
+            ),
         ),
         migrations.CreateModel(
-            name='ProductDescription',
+            name="ProductDescription",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.TextField(blank=True, null=True, verbose_name='Описание')),
-                ('key_features', models.TextField(blank=True, null=True, verbose_name='Ключевые особенности')),
-                ('ingridients', models.TextField(blank=True, null=True, verbose_name='Состав')),
-                ('guaranteed_analysis', models.TextField(blank=True, null=True, verbose_name='Гарантированный анализ')),
-                ('food_additives', models.TextField(blank=True, null=True, verbose_name='Пищевые добавки')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "description",
+                    models.TextField(blank=True, null=True, verbose_name="Описание"),
+                ),
+                (
+                    "key_features",
+                    models.TextField(
+                        blank=True, null=True, verbose_name="Ключевые особенности"
+                    ),
+                ),
+                (
+                    "ingridients",
+                    models.TextField(blank=True, null=True, verbose_name="Состав"),
+                ),
+                (
+                    "guaranteed_analysis",
+                    models.TextField(
+                        blank=True, null=True, verbose_name="Гарантированный анализ"
+                    ),
+                ),
+                (
+                    "food_additives",
+                    models.TextField(
+                        blank=True, null=True, verbose_name="Пищевые добавки"
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.product",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Описание продукта',
-                'verbose_name_plural': 'Описание продуктов',
+                "verbose_name": "Описание продукта",
+                "verbose_name_plural": "Описание продуктов",
             },
         ),
         migrations.CreateModel(
-            name='ProductImage',
+            name="ProductImage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.FileField(upload_to='', verbose_name='Картинка продукта')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.product', verbose_name='Продукт')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.FileField(upload_to="", verbose_name="Картинка продукта"),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.product",
+                        verbose_name="Продукт",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Картинка продукта',
-                'verbose_name_plural': 'Картинки продуктов',
+                "verbose_name": "Картинка продукта",
+                "verbose_name_plural": "Картинки продуктов",
             },
         ),
         migrations.CreateModel(
-            name='ProductProperties',
+            name="ProductProperties",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('weight', models.DecimalField(decimal_places=2, max_digits=5, verbose_name='Вес')),
-                ('price', models.DecimalField(decimal_places=2, default=0.0, max_digits=10, verbose_name='Цена')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.product', verbose_name='Продукт')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "weight",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=5, verbose_name="Вес"
+                    ),
+                ),
+                (
+                    "price",
+                    models.DecimalField(
+                        decimal_places=2,
+                        default=0.0,
+                        max_digits=10,
+                        verbose_name="Цена",
+                    ),
+                ),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.product",
+                        verbose_name="Продукт",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Расфасовка продукта',
-                'verbose_name_plural': 'Расфасовка продуктов',
+                "verbose_name": "Расфасовка продукта",
+                "verbose_name_plural": "Расфасовка продуктов",
             },
         ),
         migrations.CreateModel(
-            name='ProductType',
+            name="ProductType",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, verbose_name='Тип продукта')),
-                ('productCategory', models.ManyToManyField(to='catalog.productcategory', verbose_name='Категория продукта')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="Тип продукта")),
+                (
+                    "productCategory",
+                    models.ManyToManyField(
+                        to="catalog.productcategory", verbose_name="Категория продукта"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Тип продукта',
-                'verbose_name_plural': 'Типы продуктов',
+                "verbose_name": "Тип продукта",
+                "verbose_name_plural": "Типы продуктов",
             },
         ),
         migrations.AddField(
-            model_name='product',
-            name='product_type',
-            field=models.ManyToManyField(to='catalog.producttype', verbose_name='Тип продукта'),
+            model_name="product",
+            name="product_type",
+            field=models.ManyToManyField(
+                to="catalog.producttype", verbose_name="Тип продукта"
+            ),
         ),
         migrations.CreateModel(
-            name='Promotion',
+            name="Promotion",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('discount', models.DecimalField(decimal_places=2, max_digits=5, verbose_name='Цена со скидкой')),
-                ('start_date', models.DateTimeField(verbose_name='Дата начала акции')),
-                ('end_date', models.DateTimeField(verbose_name='Дата окончания акции')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='catalog.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "discount",
+                    models.DecimalField(
+                        decimal_places=2, max_digits=5, verbose_name="Цена со скидкой"
+                    ),
+                ),
+                ("start_date", models.DateTimeField(verbose_name="Дата начала акции")),
+                ("end_date", models.DateTimeField(verbose_name="Дата окончания акции")),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.product",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Акционный товар',
-                'verbose_name_plural': 'Акционные товары',
+                "verbose_name": "Акционный товар",
+                "verbose_name_plural": "Акционные товары",
             },
         ),
     ]

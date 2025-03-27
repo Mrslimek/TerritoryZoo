@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0002_remove_producttype_productcategory'),
+        ("catalog", "0002_remove_producttype_productcategory"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='producttype',
-            name='productCategory',
-            field=models.ManyToManyField(to='catalog.productcategory', verbose_name='Категория продукта'),
+            model_name="producttype",
+            name="productCategory",
+            field=models.ManyToManyField(
+                to="catalog.productcategory", verbose_name="Категория продукта"
+            ),
         ),
     ]

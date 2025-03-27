@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0006_userprofile_favouriteproduct'),
+        ("catalog", "0006_userprofile_favouriteproduct"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='userprofile',
-            name='phone_number',
-            field=models.CharField(blank=True, max_length=15, null=True, verbose_name='Номер телефона'),
+            model_name="userprofile",
+            name="phone_number",
+            field=models.CharField(
+                blank=True, max_length=15, null=True, verbose_name="Номер телефона"
+            ),
         ),
     ]

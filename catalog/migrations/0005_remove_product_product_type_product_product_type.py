@@ -7,18 +7,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0004_rename_productcategory_producttype_product_category'),
+        ("catalog", "0004_rename_productcategory_producttype_product_category"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='product',
-            name='product_type',
+            model_name="product",
+            name="product_type",
         ),
         migrations.AddField(
-            model_name='product',
-            name='product_type',
-            field=models.ForeignKey(default='1', on_delete=django.db.models.deletion.DO_NOTHING, to='catalog.producttype', verbose_name='Тип продукта'),
+            model_name="product",
+            name="product_type",
+            field=models.ForeignKey(
+                default="1",
+                on_delete=django.db.models.deletion.DO_NOTHING,
+                to="catalog.producttype",
+                verbose_name="Тип продукта",
+            ),
             preserve_default=False,
         ),
     ]

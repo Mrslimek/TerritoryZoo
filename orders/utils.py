@@ -3,7 +3,7 @@ from .models import Order
 
 
 def create_order(user):
-    order_num = get_random_string(length=10)  # Генерирует случайный номер заказа длиной 10 символов
+    order_num = get_random_string(length=10)
 
     new_order = Order.objects.create(
         user=user,

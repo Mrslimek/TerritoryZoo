@@ -1,7 +1,18 @@
 from django.contrib import admin
-from .models import *
+from .models import (
+    ProductDescription,
+    ProductProperties,
+    FavouriteProduct,
+    ProductCategory,
+    ProductImage,
+    ProductType,
+    Promotion,
+    Product,
+    Article,
+    Brand,
+    Sale,
+)
 
-# Register your models here.
 
 admin.site.register(Product)
 admin.site.register(ProductImage)

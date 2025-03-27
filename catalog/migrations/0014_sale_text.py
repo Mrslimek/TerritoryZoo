@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0013_sale'),
+        ("catalog", "0013_sale"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='sale',
-            name='text',
-            field=models.TextField(default='1', verbose_name='Текст акции'),
+            model_name="sale",
+            name="text",
+            field=models.TextField(default="1", verbose_name="Текст акции"),
             preserve_default=False,
         ),
     ]

@@ -7,13 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0008_cartitem'),
+        ("catalog", "0008_cartitem"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='cartitem',
-            name='product_weight',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='catalog.productproperties', verbose_name='Объем продукта'),
+            model_name="cartitem",
+            name="product_weight",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="catalog.productproperties",
+                verbose_name="Объем продукта",
+            ),
         ),
     ]
