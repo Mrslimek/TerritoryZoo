@@ -42,9 +42,15 @@ class Order(models.Model):
     status = models.PositiveSmallIntegerField(
         choices=ORDER_STATUS_CHOICES, verbose_name="Статус заказа"
     )
-    city = models.CharField(blank=True, null=True, verbose_name="Город")
-    street = models.CharField(blank=True, null=True, verbose_name="Улица/Переулок")
-    house_num = models.CharField(blank=True, null=True, verbose_name="Номер дома")
+    city = models.CharField(
+        blank=True, null=True, verbose_name="Город"
+        )
+    street = models.CharField(
+        blank=True, null=True, verbose_name="Улица/Переулок"
+        )
+    house_num = models.CharField(
+        blank=True, null=True, verbose_name="Номер дома"
+    )
     entrance_num = models.CharField(
         blank=True, null=True, verbose_name="Номер подъезда"
     )
@@ -54,6 +60,7 @@ class Order(models.Model):
     postal_code = models.CharField(
         blank=True, null=True, verbose_name="Почтовый индекс"
     )
+    date_created = models.DateField(auto_now_add=True, verbose_name="Дата создания")
 
     class Meta:
         verbose_name = "Заказ"
