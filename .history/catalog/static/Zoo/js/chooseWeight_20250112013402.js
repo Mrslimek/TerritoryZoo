@@ -1,2 +1,0 @@
-
-const weightButton = document.getElementById

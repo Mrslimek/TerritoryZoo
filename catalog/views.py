@@ -1,3 +1,5 @@
+#Python
+import os
 # django
 from django.shortcuts import render
 from django.core.paginator import Paginator
@@ -19,6 +21,7 @@ def home(request):
     articles = Article.objects.all()
     user = request.user
     cart_items_count = 0
+    google_api_key = os.getenv('GOOGLE_API_KEY')
 
     if user.is_authenticated:
         cart_items_count = CartItem.objects.filter(user=request.user).count()
@@ -30,7 +33,8 @@ def home(request):
         'products_by_popularity': products_by_popularity,
         'brands': brands,
         'articles': articles,
-        'cart_items_count': cart_items_count
+        'cart_items_count': cart_items_count,
+        'google_api_key': google_api_key
     }
 
     return render(request, 'Zoo.html', context)
@@ -189,6 +193,7 @@ def articles(request):
 
     search_form = SearchForm()
 
+    yandex_api_key = os.getenv('YANDEX_API_KEY')
     products_by_popularity = Product.objects.all().order_by('-popularity')
     articles = Article.objects.all()
     categories = ProductCategory.objects.all()
@@ -202,7 +207,8 @@ def articles(request):
         'search_form': search_form,
         'cart_items_count': cart_items_count,
         'products_by_popularity': products_by_popularity,
-        'articles': articles
+        'articles': articles,
+        'yandex_api_key': yandex_api_key
     }
 
     return render(request, 'articles.html', context)
@@ -211,6 +217,7 @@ def sales(request):
 
     search_form = SearchForm()
 
+    yandex_api_key = os.getenv('YANDEX_API_KEY')
     sales = Sale.objects.all()
     products_by_popularity = Product.objects.all().order_by('-popularity')
     user = request.user
@@ -224,7 +231,8 @@ def sales(request):
         'search_form': search_form,
         'sales': sales,
         'cart_items_count': cart_items_count,
-        'products_by_popularity': products_by_popularity
+        'products_by_popularity': products_by_popularity,
+        'yandex_api_key': yandex_api_key
     }
 
     return render(request, 'sales.html', context)

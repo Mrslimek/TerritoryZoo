@@ -1093,7 +1093,7 @@
                                 <div class="location__map">
                                     <div class="location__map" id="map" style="width: 600px; height: 400px;"></div>
 
-                                    <script src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&callback=initMap" async defer></script>
+                                    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}&callback=initMap" async defer></script>
                                     <script> 
                                       function initMap() {
                                         var map = new google.maps.Map(document.getElementById('map'), {
