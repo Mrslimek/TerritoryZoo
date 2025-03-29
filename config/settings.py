@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     "accounts",
     "basket",
     "orders",
+    'tasks',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [

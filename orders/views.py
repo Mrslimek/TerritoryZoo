@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .forms import OrderForm
 from .models import Product, OrderItem, User
 from .utils import create_order
-from .tasks import clear_cart
+from tasks.tasks import clear_cart
 
 
 @login_required
