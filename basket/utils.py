@@ -2,6 +2,10 @@ from .models import CartItem
 
 
 def calculate_final_price(user):
+    """
+    Возвращает цену товара с учетом скидки,
+    если она есть.
+    """
     products = CartItem.objects.filter(user=user)
 
     total_price = 0

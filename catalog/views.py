@@ -7,7 +7,9 @@ from basket.models import CartItem
 
 
 def home(request):
-
+    """
+    Представление для домашней страницы
+    """
     search_form = SearchForm()
 
     product_categories = ProductCategory.objects.all()
@@ -38,7 +40,10 @@ def home(request):
 
 
 def catalog_filter_by_id(request, product_category_id):
-
+    """
+    Представление, отдающее шаблон каталога
+    с фильтрацией по ProductCategory
+    """
     context = {}
     search_form = SearchForm()
 
@@ -74,7 +79,10 @@ def catalog_filter_by_id(request, product_category_id):
 
 
 def catalog(request):
-
+    """
+    Представление, отдающее шаблон каталога
+    для всех товаров
+    """
     search_form = SearchForm()
 
     categories = ProductCategory.objects.all()
@@ -107,7 +115,9 @@ def catalog(request):
 
 
 def card_product(request, id):
-
+    """
+    Представление, отдающее шаблон карточки товара
+    """
     products = Product.objects.all()
     product = products.get(id=id)
 
@@ -137,7 +147,10 @@ def card_product(request, id):
 
 
 def brands(request):
-
+    """
+    Представление, отдающее шаблон страницы
+    со списком брендов
+    """
     search_form = SearchForm()
 
     brands = Brand.objects.all()
@@ -168,7 +181,9 @@ def brands(request):
 
 
 def search_results(request):
-
+    """
+    Представление, отдающее шаблон каталога с результатами поиска
+    """
     search_form = SearchForm()
 
     context = {}
@@ -196,7 +211,9 @@ def search_results(request):
 
 
 def articles(request):
-
+    """
+    Представлние, отдающее шаблон страницы с со статьями
+    """
     search_form = SearchForm()
 
     yandex_api_key = os.getenv("YANDEX_API_KEY")
@@ -221,7 +238,9 @@ def articles(request):
 
 
 def sales(request):
-
+    """
+    Представление, отдающее шаблон страницы с акциями
+    """
     search_form = SearchForm()
 
     yandex_api_key = os.getenv("YANDEX_API_KEY")
@@ -245,7 +264,9 @@ def sales(request):
 
 
 def get_full_article(request, article_id):
-
+    """
+    Представление, отдающее шаблон полной статьи
+    """
     form = SearchForm()
 
     article = Article.objects.get(id=article_id)

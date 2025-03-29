@@ -8,6 +8,9 @@ from tasks.tasks import clear_cart
 
 @login_required
 def make_order_items(request):
+    """
+    Страница создания заказа с использованием формы заказа
+    """
     context = {}
     order_form = OrderForm()
     user = request.user

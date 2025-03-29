@@ -3,6 +3,10 @@ from rest_framework.response import Response
 
 
 class CustomPagination(PageNumberPagination):
+    """
+    Кастомный объект респонса для drf пагинатора
+    Добавлено возвращание поля 'results': data
+    """
     def get_paginated_response(self, data):
         return Response(
             {

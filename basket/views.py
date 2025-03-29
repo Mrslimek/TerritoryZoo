@@ -6,7 +6,9 @@ from catalog.forms import SearchForm
 
 
 def basket(request):
-
+    """
+    Представление, отдает шаблон корзины
+    """
     search_form = SearchForm()
 
     products = Product.objects.all()
@@ -35,6 +37,9 @@ def basket(request):
 
 
 def add_to_cart(request, product_id):
+    """
+    Добавляет товары в корзину
+    """
     product = Product.objects.get(id=product_id)
     cart_item, created = CartItem.objects.get_or_create(
         user=request.user, product=product, defaults={"quantity": 1}
@@ -47,7 +52,9 @@ def add_to_cart(request, product_id):
 
 
 def increase_quantity(request, cart_item_id):
-
+    """
+    Увеличвает кол-во товара в корзине на 1
+    """
     product = CartItem.objects.get(id=cart_item_id)
     product.quantity += 1
     product.save()
@@ -56,7 +63,9 @@ def increase_quantity(request, cart_item_id):
 
 
 def decrease_quantity(request, cart_item_id):
-
+    """
+    Уменьшает кол-во товара в корзине на 1
+    """
     product = CartItem.objects.get(id=cart_item_id)
     product.quantity -= 1
     product.save()
@@ -65,7 +74,9 @@ def decrease_quantity(request, cart_item_id):
 
 
 def remove_cart_product(request, cart_item_id):
-
+    """
+    Удаляет товар из корзины
+    """
     product = CartItem.objects.get(id=cart_item_id)
     product.delete()
 

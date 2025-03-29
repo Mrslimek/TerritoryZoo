@@ -10,6 +10,12 @@ from catalog.forms import SearchForm
 
 @login_required
 def profile(request):
+    """
+    Профиль пользователя.
+    Предоставляет возможность изменять данные пользователя, а также добавлять/изменять адреса доставки.
+
+    TODO: Идея для рефакторинга - убрать все действия при стейтах в отдельные функции для читаемости кода
+    """
     context = {}
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
@@ -61,7 +67,9 @@ def profile(request):
 
 
 def register_user(request):
-
+    """
+    Представление для регистрации пользователя
+    """
     search_form = SearchForm()
     form = RegisterForm()
 
@@ -80,7 +88,9 @@ def register_user(request):
 
 
 def login_user(request):
-
+    """
+    Представление для осуществления аутентификации пользователя
+    """
     search_form = SearchForm()
     form = LoginForm()
 
@@ -92,7 +102,7 @@ def login_user(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("http://127.0.0.1:8000/")
+                return redirect("home")
         else:
             form = form_data
 
@@ -102,12 +112,18 @@ def login_user(request):
 
 
 def logout_user(request):
+    """
+    Выход из системы
+    """
     logout(request)
     return redirect("http://127.0.0.1:8000/")
 
 
 def reset_password(request):
-
+    """
+    Представление для инициирования процесса смены пароля.
+    Пока что не работает, стоят заглушки
+    """
     search_form = SearchForm()
     form = ResetForm()
     context = {"form": form, "search_form": search_form}
@@ -127,8 +143,12 @@ def reset_password(request):
 
 
 def delete_user_profile_address(request, address_id):
-
+    """
+    Представление для удаления адреса
+    пользоваля в личном кабинете
+    """
     user_profile_address = UserProfileAddress.objects.get(id=address_id)
     user_profile_address.delete()
 
+    # TODO: Разобраться в том, что происходит в этой функции
     return HttpResponseRedirect(request.META.get("HTTP_REFERER", "/"))

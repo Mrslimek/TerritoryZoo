@@ -4,6 +4,10 @@ from accounts.models import UserProfile
 
 
 class FavouriteProduct(models.Model):
+    """
+    Модель для Продукта, добавленного в избранное.
+    Пока что не используется.
+    """
     user_profile = models.ForeignKey(
         UserProfile, verbose_name="Пользователь", on_delete=models.CASCADE
     )
@@ -16,7 +20,9 @@ class FavouriteProduct(models.Model):
 
 
 class Brand(models.Model):
-
+    """
+    Модель для бренда продукта
+    """
     name = models.CharField(
         max_length=255, unique=True, verbose_name="Название продукта"
     )
@@ -34,6 +40,9 @@ class Brand(models.Model):
 
 
 class ProductCategory(models.Model):
+    """
+    Модель для категории продукта
+    """
     name = models.CharField(
         max_length=255, unique=True, verbose_name="Категория продукта"
     )
@@ -48,6 +57,9 @@ class ProductCategory(models.Model):
 
 
 class ProductType(models.Model):
+    """
+    Модель для типа продукта
+    """
     name = models.CharField(max_length=255, verbose_name="Тип продукта")
     product_category = models.ManyToManyField(
         "ProductCategory", verbose_name="Категория продукта"
@@ -62,6 +74,9 @@ class ProductType(models.Model):
 
 
 class Product(models.Model):
+    """
+    Модель для продукта
+    """
     UNIT_CHOICES = [("кг", "кг"), ("л", "л"), ("г", "г"), ("шт", "шт")]
     brand = models.ForeignKey("Brand", on_delete=models.CASCADE, verbose_name="Бренд")
     title = models.CharField(max_length=255, unique=True, verbose_name="Название")
@@ -101,6 +116,9 @@ class Product(models.Model):
 
 
 class ProductDescription(models.Model):
+    """
+    Модель для описания продукта
+    """
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
     description = models.TextField(null=True, verbose_name="Описание", blank=True)
     key_features = models.TextField(
@@ -123,6 +141,9 @@ class ProductDescription(models.Model):
 
 
 class ProductImage(models.Model):
+    """
+    Модель для изображений продукта
+    """
     product = models.ForeignKey(
         "Product", on_delete=models.CASCADE, verbose_name="Продукт"
     )
@@ -137,6 +158,10 @@ class ProductImage(models.Model):
 
 
 class ProductProperties(models.Model):
+    """
+    Модель для характеристик продукта.
+    Например, вариант фасовки и его цена
+    """
     product = models.ForeignKey(
         "Product", on_delete=models.CASCADE, verbose_name="Продукт"
     )
@@ -154,6 +179,10 @@ class ProductProperties(models.Model):
 
 
 class Promotion(models.Model):
+    """
+    Модель для акций.
+    TODO: Нужно объединить товары на акции под конкретные акции, типа "Черная пятница"
+    """
     product = models.ForeignKey(
         "Product", on_delete=models.CASCADE, verbose_name="Продукт"
     )
@@ -177,6 +206,9 @@ class Promotion(models.Model):
 
 
 class Article(models.Model):
+    """
+    Модель для статьи
+    """
     title = models.CharField(max_length=255, verbose_name="Название статьи")
     article_text = models.TextField(verbose_name="Текст статьи")
     reading_time = models.IntegerField(verbose_name="Время чтения")
@@ -192,6 +224,10 @@ class Article(models.Model):
 
 
 class Sale(models.Model):
+    """
+    Модель для именованных акций на товары.
+    TODO: Нужно как-то связать с моделью Promotion
+    """
     title = models.CharField(max_length=255, verbose_name="Название акции")
     text = models.TextField(verbose_name="Текст акции")
     image = models.ImageField(verbose_name="Картинка акции")

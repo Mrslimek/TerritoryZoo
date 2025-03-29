@@ -6,7 +6,9 @@ from .pagination import CustomPagination
 
 @api_view(["GET"])
 def get_products_paginated(request):
-
+    """
+    Апи представление. Возвращает все продукты с пагинацией
+    """
     products = Product.objects.all()
     paginator = CustomPagination()
     page_obj = paginator.paginate_queryset(products, request)
@@ -22,9 +24,11 @@ def get_products_paginated(request):
 
 @api_view(["GET", "POST"])
 def get_products_filtered(request):
-
-    print(request.data)
-
+    """
+    Апи представление. Возвращает продукты с участием фильтрации
+    и пагинацией.
+    TODO: Рассмотреть возможность рефакторинга фильтрации здесь с помощью django фильтров
+    """
     filters = {}
     response_data = {}
     fields = ["title__icontains", "product_category", "product_type_id", "brand_id__in"]

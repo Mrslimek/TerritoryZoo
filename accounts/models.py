@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 
 
 class UserProfile(models.Model):
+    """
+    Модель профиля для модели User
+    """
     user = models.OneToOneField(
         User, verbose_name="Пользователь", on_delete=models.CASCADE
     )
@@ -18,6 +21,9 @@ class UserProfile(models.Model):
 
 
 class UserProfileAddress(models.Model):
+    """
+    Модель адреса для модели UserProfile
+    """
     profile = models.ForeignKey(
         UserProfile, on_delete=models.CASCADE, verbose_name="Профиль пользователя"
     )

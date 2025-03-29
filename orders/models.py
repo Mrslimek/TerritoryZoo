@@ -4,7 +4,10 @@ from catalog.models import Product
 
 
 class Order(models.Model):
-
+    """
+    Модель заказа.
+    Имеет связь с пользователем.
+    """
     ORDER_STATUS_CHOICES = (
         (1, "Создан"),
         (2, "Оформлен"),
@@ -71,6 +74,9 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    """
+    Модель позиции заказа
+    """
     order = models.ForeignKey(
         Order, on_delete=models.CASCADE, verbose_name="Номер заказа"
     )

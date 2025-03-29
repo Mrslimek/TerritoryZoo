@@ -3,6 +3,9 @@ from .models import Order
 
 
 def create_order(user):
+    """
+    Функция для создания нового заказа для пользователя
+    """
     order_num = get_random_string(length=10)
 
     new_order = Order.objects.create(
