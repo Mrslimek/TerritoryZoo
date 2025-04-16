@@ -584,16 +584,11 @@
                         {% for f in form %}
                             <div class="login-form-box">{{ f.label }}: {{ f }}</div>
                         {% endfor %} 
-                        {% if form.errors %}
-                            <div style="color: red;" class="errors">
-                                <ul>
-                                    {% for field, errors in form.errors.items %}
-                                        {% for error in errors %}
-                                            <li>{{ error }}</li>
-                                        {% endfor %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <h3 style="color: red;">{{ message }}</h3>
+                            {% endfor %}
                         {% endif %}
                         <div class="login-form-buttons">
                             <button>Вход</button>

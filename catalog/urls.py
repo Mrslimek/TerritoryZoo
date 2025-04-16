@@ -14,7 +14,7 @@ from .views import (
 
 
 urlpatterns = [
-    path("", home),
+    path("", home, name="home"),
     path("catalog/", catalog, name="catalog"),
     path(
         "catalog/<int:product_category_id>",

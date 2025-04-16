@@ -1,26 +1,11 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.forms import ValidationError
 from django import forms
-from .utils import *
 from .models import *
 
 
-class RegisterForm(UserCreationForm):
-
-    password1 = forms.CharField(
-        label="Пароль",
-        widget=forms.PasswordInput(
-            attrs={"placeholder": "Введите пароль", "class": "register-form-field"}
-        ),
-    )
-
-    password2 = forms.CharField(
-        label="Повторите пароль",
-        widget=forms.PasswordInput(
-            attrs={"placeholder": "Повторите пароль", "class": "register-form-field"}
-        ),
-    )
+class RegisterForm(forms.Form):
 
     username = forms.CharField(
         label="Логин",
@@ -36,9 +21,34 @@ class RegisterForm(UserCreationForm):
         ),
     )
 
-    class Meta:
-        model = User
-        fields = ("username", "password1", "password2", "email")
+    password = forms.CharField(
+        label="Пароль",
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Введите пароль", "class": "register-form-field"}
+        ),
+    )
+
+    confirm_password = forms.CharField(
+        label="Повторите пароль",
+        widget=forms.PasswordInput(
+            attrs={"placeholder": "Повторите пароль", "class": "register-form-field"}
+        ),
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get("username")
+        email = cleaned_data.get("email")
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.pop("confirm_password")
+        if User.objects.filter(username=username).exists():
+            self.add_error("username", "Пользователь с таким username уже существует")
+        if User.objects.filter(email=email).exists():
+            self.add_error("email", "Пользователь с таким email уже существует")
+        if password and confirm_password and password != confirm_password:
+            self.add_error("password", "Пароли не совпадают")
+
+        return cleaned_data
 
 
 class LoginForm(forms.Form):
@@ -47,7 +57,6 @@ class LoginForm(forms.Form):
         widget=forms.TextInput(
             attrs={"placeholder": "Введите ваше имя", "class": "login-form-field"}
         ),
-        validators=[username_validator],
     )
 
     password = forms.CharField(
@@ -56,18 +65,6 @@ class LoginForm(forms.Form):
             attrs={"placeholder": "Введите пароль", "class": "login-form-field"}
         ),
     )
-
-    def clean(self):
-        cleaned_data = super().clean()
-        username = cleaned_data.get("username")
-        password = cleaned_data.get("password")
-        if username and password:
-            user = authenticate(username=username, password=password)
-            if user is None:
-                raise forms.ValidationError(
-                    ("Логин или пароль не существует"), code="invalid_login"
-                )
-            return cleaned_data
 
 
 class ResetForm(forms.Form):
@@ -80,14 +77,14 @@ class ResetForm(forms.Form):
 
 
 class CustomUserChangeForm(forms.Form):
-    password1 = forms.CharField(
+    password = forms.CharField(
         label="Введите пароль",
         widget=forms.PasswordInput(
             attrs={"class": "input_field", "placeholder": "Введите пароль"}
         ),
         required=False,
     )
-    password2 = forms.CharField(
+    confirm_password = forms.CharField(
         label="Подтвердите пароль",
         widget=forms.PasswordInput(
             attrs={"class": "input_field", "placeholder": "Подтвердите пароль"}
@@ -115,15 +112,15 @@ class CustomUserChangeForm(forms.Form):
     )
 
     def clean_password2(self):
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
+        password = self.cleaned_data.get("password")
+        confirm_password = self.cleaned_data.get("confirm_password")
+        if password and confirm_password and password != confirm_password:
             raise forms.ValidationError("Пароли не совпадают")
         return password2
 
     def save(self, instance, commit=True):
         for key, value in self.cleaned_data.items():
-            if key == "password1":
+            if key == "password":
                 if value:
                     instance.set_password(value)
             else:

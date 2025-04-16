@@ -6,6 +6,7 @@ class UserProfile(models.Model):
     """
     Модель профиля для модели User
     """
+
     user = models.OneToOneField(
         User, verbose_name="Пользователь", on_delete=models.CASCADE
     )
@@ -17,13 +18,14 @@ class UserProfile(models.Model):
     )
 
     def __str__(self):
-        return self.phone_number
+        return f"{self.user}"
 
 
 class UserProfileAddress(models.Model):
     """
     Модель адреса для модели UserProfile
     """
+
     profile = models.ForeignKey(
         UserProfile, on_delete=models.CASCADE, verbose_name="Профиль пользователя"
     )

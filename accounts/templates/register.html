@@ -483,22 +483,24 @@
                         <div class="register-form-title">
                             <p>Регистрация</p>
                         </div>
-                            {% for form in form %}
-                                {% if form.label == 'Пароль' %}
-                                    <div class="register-form-box">
-                                        Сложность пароля: <br>
-                                    </div>
-                                {% endif %}
+                        {% for form in form %}
+                            {% if form.label == 'Пароль' %}
                                 <div class="register-form-box">
-                                    {{ form.label }}:
-                                    {{ form }}
+                                    Сложность пароля: <br>
                                 </div>
-                                {% if form.errors %}
-                                    <div style="color: red;">
-                                        {{ form.errors }}
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+                            {% endif %}
+                            <div class="register-form-box">
+                                {{ form.label }}:
+                                {{ form }}
+                            </div>
+                        {% endfor %}
+                        {% if messages %}
+                            <ul style="border: 3px solid red;">
+                                {% for message in messages %}
+                                    <li style="color: red;">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                         <div class="register-form-buttons">
                             <a class="register-form-buttons-a" href="{% url 'login' %}">Вход</a>
                             <button type="submit">Регистрация</button>

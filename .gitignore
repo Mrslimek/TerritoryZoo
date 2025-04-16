@@ -59,6 +59,7 @@ cover/
 *.log
 local_settings.py
 prod_settings.py
+staticfiles
 #db.sqlite3
 #db.sqlite3-journal
 
@@ -168,3 +169,8 @@ idea/
 
 #misc
 diploma_images.7z
+docker-compose.yaml
+entrypoint.sh
+.dockerignore
+docker
+legacy

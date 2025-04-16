@@ -26,8 +26,8 @@ INSTALLED_APPS = [
     "accounts",
     "basket",
     "orders",
-    'tasks',
-    'django_celery_beat',
+    "tasks",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -100,9 +100,26 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATIC_URL = "/static/"
+STATIC_ROOT = "app/staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 15,
 }
+
+BEPAYD_SHOP_ID = os.getenv("BEPAYD_SHOP_ID")
+BEPAYD_SECRET_KEY = os.getenv("BEPAYD_SECRET_KEY")
+BEPAYD_API_URL = os.getenv("BEPAYD_API_URL")
+
+# Данные для bePaid
+# data = {
+#         "amount": amount * 100,  # bePaid принимает сумму в минимальных единицах (копейки)
+#         "currency": BYN,
+#         "description": "Оплата заказа",
+#         "order_id": order_id,
+#         "notification_url": "https://your-site.com/payment-status",
+#         "return_url": "https://your-site.com/success",
+#         "customer": {
+#             "email": "user@example.com"
+#         }

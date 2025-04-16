@@ -1,69 +1,85 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login, logout
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 from .forms import *
 from .models import *
+from .services import (
+    authenticate_and_login_user,
+    create_user_and_user_profile,
+    form_errors_to_messages,
+)
 from catalog.forms import SearchForm
 
 
 @login_required
 def profile(request):
-    """
-    Профиль пользователя.
-    Предоставляет возможность изменять данные пользователя, а также добавлять/изменять адреса доставки.
+    return render(request, "profile_menu.html")
 
-    TODO: Идея для рефакторинга - убрать все действия при стейтах в отдельные функции для читаемости кода
-    """
-    context = {}
+
+@login_required
+def profile_account_data(request):
     user = request.user
-    user_profile = UserProfile.objects.get(user=user)
+    form = CustomUserChangeForm(request.POST or None)
+    context = {
+        "form": form
+    }
+
+    if request.method == "POST" and form.is_valid():
+        form.save(instance=user)
+        return render(request, "account_data.html", context)
+    else:
+        errors = form.errors
+        form_errors_to_messages(request, errors)
+
+    return render(request, "account_data.html", context)
+
+
+@login_required
+def profile_data(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+    form = UserProfileChangeForm(request.POST or None, instance=user_profile)
+    context = {
+        "form": form
+    }
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        return render(request, "profile_data.html", context)
+    else:
+        errors = form.errors
+        form_errors_to_messages(request, errors)
+
+    return render(request, "profile_data.html", context)
+
+
+@login_required
+def profile_address_data(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
     user_profile_address = UserProfileAddress.objects.filter(profile=user_profile) or [
         "Пока что нет адресов"
     ]
+    form = UserProfileAddressForm(request.POST or None)
 
-    user_change_form = CustomUserChangeForm()
-    user_profile_change_form = UserProfileChangeForm()
-    user_profile_address_form = UserProfileAddressForm()
+    context = {
+        "form": form,
+        "user_profile_address": user_profile_address,
+        "profile": user_profile,
+        "user": user,
+    }
 
-    if request.method == "POST":
-        if "user_change" in request.POST:
-            user_change_form = CustomUserChangeForm(request.POST)
-            if user_change_form.is_valid():
-                user_change_form.save(instance=user)
-                return redirect("profile")
-            else:
-                context["password_message"] = user_change_form.errors
+    if request.method == "POST" and form.is_valid():
+        form.save(instance=user_profile)
+        return render(request, "address_data.html", context)
+    else:
+        errors = form.errors
+        form_errors_to_messages(request, errors)
 
-        elif "profile_change" in request.POST:
-            user_profile_change_form = UserProfileChangeForm(
-                request.POST, instance=user_profile
-            )
-            if user_profile_change_form.is_valid():
-                user_profile_change_form.save()
-                return redirect("profile")
-
-        elif "user_profile_address_add" in request.POST:
-            user_profile_address_form = UserProfileAddressForm(request.POST)
-            if user_profile_address_form.is_valid():
-                address = user_profile_address_form.save(instance=user_profile)
-                address.profile = user_profile
-                address.save()
-                return redirect("profile")
-
-    context.update(
-        {
-            "user_change_form": user_change_form,
-            "user_profile_change_form": user_profile_change_form,
-            "user_profile_address_form": user_profile_address_form,
-            "user_profile_address": user_profile_address,
-            "profile": user_profile,
-            "user": user,
-        }
-    )
-
-    return render(request, "profile.html", context)
+    return render(request, "address_data.html", context)
 
 
 def register_user(request):
@@ -71,18 +87,16 @@ def register_user(request):
     Представление для регистрации пользователя
     """
     search_form = SearchForm()
-    form = RegisterForm()
-
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user_profile = UserProfile.objects.create(user=user)
-            return redirect("login")
-        if form.errors:
-            form = form
-
+    form = RegisterForm(request.POST or None)
     context = {"search_form": search_form, "form": form}
+
+    if request.method == "POST" and form.is_valid():
+        user_data = form.cleaned_data
+        create_user_and_user_profile(user_data)
+        return redirect("login")
+    if request.method == "POST" and not form.is_valid():
+        errors = form.errors
+        form_errors_to_messages(request, errors)
 
     return render(request, "register.html", context)
 
@@ -92,21 +106,14 @@ def login_user(request):
     Представление для осуществления аутентификации пользователя
     """
     search_form = SearchForm()
-    form = LoginForm()
-
-    if request.method == "POST":
-        form_data = LoginForm(data=request.POST)
-        if form_data.is_valid():
-            username = form_data.cleaned_data.get("username")
-            password = form_data.cleaned_data.get("password")
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("home")
-        else:
-            form = form_data
-
+    form = LoginForm(request.POST or None)
     context = {"form": form, "search_form": search_form}
+
+    if request.method == "POST" and form.is_valid():
+        username = form.cleaned_data["username"]
+        password = form.cleaned_data["password"]
+        if authenticate_and_login_user(request, username, password):
+            return redirect("home")
 
     return render(request, "login.html", context)
 
@@ -116,7 +123,7 @@ def logout_user(request):
     Выход из системы
     """
     logout(request)
-    return redirect("http://127.0.0.1:8000/")
+    return redirect("home")
 
 
 def reset_password(request):
@@ -125,19 +132,20 @@ def reset_password(request):
     Пока что не работает, стоят заглушки
     """
     search_form = SearchForm()
-    form = ResetForm()
+    form = ResetForm(request.POST or None)
     context = {"form": form, "search_form": search_form}
 
-    if request.method == "POST":
-        form_data = ResetForm(request.POST)
-        if form_data.is_valid():
-            email = form_data.cleaned_data.get("email")
-            if User.objects.filter(email=email).exists():
-                message = "На указанный адрес было отправлено письмо для восстановления пароля"
-                context["message"] = message
-            else:
-                message = "Пользователя с таким email не существует"
-                context["message"] = message
+    # TODO Реализовать отправку письма пользователю на почту с ссылкой для восстановления пароля
+
+    if request.method == "POST" and form.is_valid():
+        email = form_data.cleaned_data.get("email")
+        if User.objects.filter(email=email).exists():
+            message = (
+                "На указанный адрес было отправлено письмо для восстановления пароля"
+            )
+        else:
+            message = "Пользователя с таким email не существует"
+            context["message"] = message
 
     return render(request, "reset_form.html", context)
 
