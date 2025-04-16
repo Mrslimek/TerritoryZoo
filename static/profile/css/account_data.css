@@ -1,0 +1,61 @@
+/* css для account_data.html */
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* Центрирование формы по вертикали */
+    padding: 0; /* Убираем внутренние отступы */
+}
+
+form {
+    max-width: 400px;
+    width: 100%;
+    border: 2px solid rgb(0, 160, 172);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0; /* Убираем внешние отступы */
+}
+
+.input_field {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgb(0, 160, 172);
+    border-radius: 5px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: rgb(0, 100, 110);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+button {
+    background-color: rgb(0, 160, 172);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: rgb(0, 140, 150);
+}
