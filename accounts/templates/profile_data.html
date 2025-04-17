@@ -461,7 +461,12 @@
             <div class="form-wrapper">
                 <form method="post" class="form">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    <label for="first_name">{{ form.phone_number.label }}</label>
+                    <p class="current_value">Текущее значение: <strong>{{ user_profile.phone_number }}</strong></p>
+                    {{ form.phone_number }}
+                    <label for="first_name">{{ form.date_of_birth.label }}</label>
+                    <p class="current_value">Текущее значение: <strong>{{ user_profile.date_of_birth }}</strong></p>
+                    {{ form.date_of_birth }}
                     <button type="submit">Сохранить изменения</button>
                 </form>
             </div>

@@ -461,8 +461,24 @@
             <div class="form-wrapper">
                 <form method="post" class="form">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">Сохранить изменения</button>
+                    <label for="first_name">{{ form.city.label }}</label>
+                    {{ form.city }}
+                    
+                    <label for="last_name">{{ form.street.label }}</label>
+                    {{ form.street }}
+
+                    <label for="email">{{ form.house_num.label }}</label>
+                    {{ form.house_num }}
+
+                    <label for="password">{{ form.entrance_num.label }}</label>
+                    {{ form.entrance_num }}
+
+                    <label for="confirm_password">{{ form.apartment_num.label }}</label>
+                    {{ form.apartment_num }}
+
+                    <label for="confirm_password">{{ form.postal_code.label }}</label>
+                    {{ form.postal_code }}
+                    <button type="submit">Сохранить</button>
                 </form>
             </div>
         </main>        

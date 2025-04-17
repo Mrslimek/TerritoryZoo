@@ -17,6 +17,7 @@ form {
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0; /* Убираем внешние отступы */
+    font-family: 'SF Pro Text', sans-serif;
 }
 
 .input_field {
@@ -25,6 +26,7 @@ form {
     border: 2px solid rgb(0, 160, 172);
     border-radius: 5px;
     font-size: 16px;
+    font-family: 'SF Pro Text', sans-serif;
     margin-bottom: 10px;
 }
 
@@ -47,6 +49,7 @@ label {
 button {
     background-color: rgb(0, 160, 172);
     color: white;
+    font-family: 'SF Pro Text', sans-serif;
     border: none;
     padding: 12px 20px;
     font-size: 16px;
@@ -58,4 +61,10 @@ button {
 
 button:hover {
     background-color: rgb(0, 140, 150);
+}
+
+.current_value {
+    color: rgb(0, 100, 110);
+    font-family: 'SF Pro Text', sans-serif;
+    padding: 5px 0;
 }

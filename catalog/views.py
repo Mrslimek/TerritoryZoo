@@ -2,7 +2,7 @@ import os
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from .forms import SearchForm
-from .models import ProductCategory, Product, Brand, Article, Sale
+from .models import ProductCategory, ProductType, Product, Brand, Article, Sale
 from basket.models import CartItem
 
 
@@ -167,8 +167,6 @@ def brands(request):
     }
 
     return render(request, "brands.html", context)
-
-    print(brand_id, "BRAND_ID")
 
     products = Product.objects.filter(brand=brand_id)
     paginator = Paginator(products, 15)

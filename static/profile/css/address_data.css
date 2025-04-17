@@ -24,6 +24,7 @@
     border: 2px solid rgb(0, 160, 172);
     border-radius: 5px;
     font-size: 16px;
+    font-family: 'SF Pro Text', sans-serif;
     margin-bottom: 10px;
 }
 
@@ -32,6 +33,7 @@ label {
     display: block;
     margin-bottom: 5px;
     color: rgb(0, 100, 110);
+    font-family: 'SF Pro Text', sans-serif;
 }
 
 .form-group {
@@ -49,6 +51,7 @@ button {
     border: none;
     padding: 12px 20px;
     font-size: 16px;
+    font-family: 'SF Pro Text', sans-serif;
     cursor: pointer;
     border-radius: 5px;
     display: block;
@@ -57,4 +60,10 @@ button {
 
 button:hover {
     background-color: rgb(0, 140, 150);
+}
+
+.current_value {
+    color: rgb(0, 100, 110);
+    font-family: 'SF Pro Text', sans-serif;
+    padding: 5px 0;
 }

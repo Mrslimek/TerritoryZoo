@@ -16,16 +16,21 @@ from catalog.forms import SearchForm
 
 @login_required
 def profile(request):
+    """
+    Представление для перенаправления на разные формы
+    для управления личным кабинетом пользователя
+    """
     return render(request, "profile_menu.html")
 
 
 @login_required
 def profile_account_data(request):
+    """
+    Представление, отдает форму для изменения данных User
+    """
     user = request.user
     form = CustomUserChangeForm(request.POST or None)
-    context = {
-        "form": form
-    }
+    context = {"form": form, "user": user}
 
     if request.method == "POST" and form.is_valid():
         form.save(instance=user)
@@ -39,12 +44,14 @@ def profile_account_data(request):
 
 @login_required
 def profile_data(request):
+    """
+    Представление, возвращает форму для управления данными
+    UserProfile
+    """
     user = request.user
     user_profile = get_object_or_404(UserProfile, user=user)
-    form = UserProfileChangeForm(request.POST or None, instance=user_profile)
-    context = {
-        "form": form
-    }
+    form = UserProfileChangeForm(request.POST or None)
+    context = {"form": form, "user_profile": user_profile}
 
     if request.method == "POST" and form.is_valid():
         form.save()
@@ -58,6 +65,10 @@ def profile_data(request):
 
 @login_required
 def profile_address_data(request):
+    """
+    Представление, возвращает форму для управлеемя данными
+    модели UserProfileAddress
+    """
     user = request.user
     user_profile = get_object_or_404(UserProfile, user=user)
     user_profile_address = UserProfileAddress.objects.filter(profile=user_profile) or [

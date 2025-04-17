@@ -77,20 +77,6 @@ class ResetForm(forms.Form):
 
 
 class CustomUserChangeForm(forms.Form):
-    password = forms.CharField(
-        label="Введите пароль",
-        widget=forms.PasswordInput(
-            attrs={"class": "input_field", "placeholder": "Введите пароль"}
-        ),
-        required=False,
-    )
-    confirm_password = forms.CharField(
-        label="Подтвердите пароль",
-        widget=forms.PasswordInput(
-            attrs={"class": "input_field", "placeholder": "Подтвердите пароль"}
-        ),
-        required=False,
-    )
     first_name = forms.CharField(
         label="Введите имя",
         widget=forms.TextInput(
@@ -107,6 +93,20 @@ class CustomUserChangeForm(forms.Form):
         label="Введите email",
         widget=forms.TextInput(
             attrs={"class": "input_field", "placeholder": "example@domain.com"}
+        ),
+        required=False,
+    )
+    password = forms.CharField(
+        label="Введите пароль",
+        widget=forms.PasswordInput(
+            attrs={"class": "input_field", "placeholder": "Введите пароль"}
+        ),
+        required=False,
+    )
+    confirm_password = forms.CharField(
+        label="Подтвердите пароль",
+        widget=forms.PasswordInput(
+            attrs={"class": "input_field", "placeholder": "Подтвердите пароль"}
         ),
         required=False,
     )

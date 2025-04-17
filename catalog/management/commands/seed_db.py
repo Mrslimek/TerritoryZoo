@@ -24,17 +24,39 @@ class Command(BaseCommand):
 
         # 2️⃣ Создание случайных брендов
         for _ in range(5):
+            image_name = fake.file_name(category='image')
             brand = Brand.objects.create(
-                name=fake.company(), image=f"brands/{fake.file_name(category='image')}"
+                name=fake.company(), image=f"brands/{image_name}"
             )
             self.stdout.write(f"✅ Добавлен бренд: {brand}")
 
+            image_folder = os.path.join(settings.MEDIA_ROOT, "brands")
+            os.makedirs(image_folder, exist_ok=True)  # Создаем папку, если ее нет
+
+            for _ in range(fake.random_int(min=1, max=3)):  # Каждому продукту 1-3 изображения
+                image_path = os.path.join(image_folder, f"{image_name}")
+                self.generate_image(image_path)  # Создаем изображение
+
+                brand.image=f"products/{os.path.basename(image_path)}"
+                self.stdout.write(f"🖼️ Создано изображение: {brand.image}")
+
         # 3️⃣ Создание категорий товаров
         for _ in range(5):
+            image_name = fake.file_name(category='image')
             category = ProductCategory.objects.create(
-                name=fake.word(), image=f"categories/{fake.file_name(category='image')}"
+                name=fake.word(), image=f"categories/{image_name}"
             )
             self.stdout.write(f"✅ Добавлена категория: {category}")
+
+            image_folder = os.path.join(settings.MEDIA_ROOT, "categories")
+            os.makedirs(image_folder, exist_ok=True)  # Создаем папку, если ее нет
+
+            for _ in range(fake.random_int(min=1, max=3)):  # Каждому продукту 1-3 изображения
+                image_path = os.path.join(image_folder, f"{image_name}")
+                self.generate_image(image_path)  # Создаем изображение
+
+                category.image=f"products/{os.path.basename(image_path)}"
+                self.stdout.write(f"🖼️ Создано изображение: {category.image}")
 
         # 4️⃣ Создание типов продуктов
         for _ in range(5):
